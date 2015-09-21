@@ -1,6 +1,7 @@
-# An research project in indoor navigation using IBeacon technology, with a focus on the blind or partially sighted
+# A research project in indoor navigation using IBeacon technology, with a focus on the blind or partially sighted
 
 ## Requirements
+
 * Android application
   * Indoor location tracking using iBeacon 
     * Proximity based tracking based on single iBeacon proxmity
@@ -15,8 +16,16 @@
   * Ability to upload/define new loctations 
   * 
 
+## Challenges
+
+* iBeacon distance accurracy
+ * iBeacons have an accuracy of +- 1 Meter from within 10 meters, and worse if the device is > 10 meters away. This will present a challenge in getting accurate location data while using both triangulation and basic proximity based tracking.
+* Determining a viable method of providing feedback to users who are sight impaired
+ * Audio feedback is an easy solution, but not preferred as it is disruptive
+ * A better solution would be to develop a haptic feedback system where different vibration patterns mean different things (Left or Right)
 
 ## Todo (In order or importance)
+
 1. Basic android app that interfaces with the IBeacon
 2. Add menus of locations to app
 3. Heading and directional tracking (IE, N-S-E-W) in order to give turn based Navigation
