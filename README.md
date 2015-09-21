@@ -1,6 +1,19 @@
 # An research project in indoor navigation using IBeacon technology, with a focus on the blind or partially sighted
 
-## Requirments 
+## Requirements
+* Android application
+  * Indoor location tracking using iBeacon 
+    * Proximity based tracking based on single iBeacon proxmity
+    * Full 2d tracking based on triangulation of >= 3 iBeacons
+  * Sight impaired navigation (Haptic or Audio based)
+  * Sight impaired friendly UI navigation 
+    * Menu to select a location, (IE. Lakeview Market, Orchard Park Mall)
+    * Menu to select a section in said location, (IE. Product section, Food Court)
+  
+* Server side application to define locations and upload new locations 
+  * Hosts locations for android application to download
+  * Ability to upload/define new loctations 
+  * 
 
 
 ## Todo (In order or importance)
