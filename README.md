@@ -27,10 +27,29 @@
 ## Todo (In order or importance)
 
 1. Basic android app that interfaces with the IBeacon
-2. Add menus of locations to app
+2. Add menus of locations to app and develop UI
 3. Heading and directional tracking (IE, N-S-E-W) in order to give turn based Navigation
 4. Navigational feedback for a user from the app (Haptic or voice)
 5. Basic location tracking using IBeacon (Simple proximity based tracking)
 6. Location triangulation using IBeacon (More exact proximity based tracking)
-7. Server/client communication between mobile device and server for configuration data and additional tracking information
-8. Pinpoint navigation of sections in a store (Lakeview market test)
+7. Pinpoint navigation of sections in a store (Lakeview market test)
+8. Server/client communication between mobile device and server for configuration data and additional tracking information
+9. Interpret location configuration files from server on device
+
+
+## Timeline
+
+Todo Item | Scheduled Completion | Completion Date
+--------- | -------------------- | ---------------
+Basic App | September 29th, 2015 | N/A
+Menus and UI    | October 13th, 2015 | N/A
+Heading/direction tracking | October 20th, 2015 | N/A
+Testing/development of feedback system | October 27th, 2015 | N/A
+Implementation of feedback system into application | November 3rd, 2015 | N/A
+Triangulation testing and algorithm development | November 17th, 2015 | N/A
+Implementation of the triangulation method into application | November 24th, 2015 | N/A
+Ability to navigate to specific section of store | December 1st, 2015 | N/A
+Create a configuration format for locations and interpret on device | Dec 15th, 2015 | N/A
+Setup up location configuration server for device to pull locations from | Jan 5th, 2016| N/A
+
+
