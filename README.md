@@ -52,9 +52,13 @@ Implementation of the triangulation method into application | November 24th, 201
 Ability to navigate to specific section of store | December 1st, 2015 | N/A
 Create a configuration format for locations and interpret on device | Dec 15th, 2015 | N/A
 Setup up location configuration server for device to pull locations from | Jan 5th, 2016| N/A
-Extra Time | Feb 2nd, 2016| N/A
+Extra Time (Possibly increase test coverage/fix bugs) | Feb 2nd, 2016| N/A
 Thesis | March 15th, 2016 | N/A
 Presentation Prep| April 5th, 2016 | N/A
 Presentation | April 14th, 2016 | N/A
 
+## Distractions
+
+* Christmas Break, 1-2 weeks off
+* Reading Break second semester, 1 week off, feb 15-19th 2016
 
