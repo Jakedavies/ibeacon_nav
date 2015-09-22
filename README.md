@@ -20,6 +20,7 @@
 
 * iBeacon distance accurracy
  * iBeacons have an accuracy of +- 1 Meter from within 10 meters, and worse if the device is > 10 meters away. This will present a challenge in getting accurate location data while using both triangulation and basic proximity based tracking.
+ * To combat this an algorithm that averages the readings over time and then triangulates could be use, this is going to be one of the primary areas of research for the project
 * Determining a viable method of providing feedback to users who are sight impaired
  * Audio feedback is an easy solution, but not preferred as it is disruptive
  * A better solution would be to develop a haptic feedback system where different vibration patterns mean different things (Left or Right)
