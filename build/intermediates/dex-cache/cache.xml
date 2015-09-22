@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Jake\AndroidStudioProjects\Innav\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\Jake\AndroidStudioProjects\Innav\app\build\intermediates\pre-dexed\debug\classes-c421615073502bfd60f289e5e8bea6aecda2c484.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jake\AndroidStudioProjects\Innav\app\build\intermediates\exploded-aar\com.estimote\sdk\0.8.8\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="97a18e04ef0efe81ac85e8cce4121ba8e9971f23">
+        <dex dex="C:\Users\Jake\AndroidStudioProjects\Innav\app\build\intermediates\pre-dexed\debug\classes-2b49f286c1229e18958596591daeb2f21746289a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jake\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="C:\Users\Jake\AndroidStudioProjects\Innav\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-2cffb8d437e7b02c6f38e9e7c4577d0061339948.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jake\AndroidStudioProjects\Innav\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\Jake\AndroidStudioProjects\Innav\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-574e3a060035b6c38770d770cef88e81b69251af.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jake\AndroidStudioProjects\Innav\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\Jake\AndroidStudioProjects\Innav\app\build\intermediates\pre-dexed\debug\classes-e073e76e1bfa987163f0a81c0837487eff55e12d.jar" />
+    </item>
+
+</items>
