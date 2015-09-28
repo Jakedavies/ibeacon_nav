@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Innav</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="welcome">Listing available IBeacons</string>
     <string name="action_settings">Settings</string>
 </resources>

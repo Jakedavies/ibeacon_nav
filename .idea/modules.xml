@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Innav.iml" filepath="$PROJECT_DIR$/Innav.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iBeacon_nav.iml" filepath="$PROJECT_DIR$/iBeacon_nav.iml" />
     </modules>
   </component>
 </project>
