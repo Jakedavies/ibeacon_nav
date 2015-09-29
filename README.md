@@ -62,3 +62,9 @@ Presentation | April 14th, 2016 | N/A
 * Christmas Break, 1-2 weeks off
 * Reading Break second semester, 1 week off, feb 15-19th 2016
 
+## UML
+
+### Use Case
+
+![Use case](readme/use_case.png)
+
