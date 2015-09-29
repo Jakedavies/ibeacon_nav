@@ -66,5 +66,5 @@ Presentation | April 14th, 2016 | N/A
 
 ### Use Case
 
-![readme/use_case.png]
+![Use case](readme/use_case.png)
 
