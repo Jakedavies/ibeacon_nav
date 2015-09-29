@@ -68,3 +68,7 @@ Presentation | April 14th, 2016 | N/A
 
 ![Use case](readme/use_case.png)
 
+### Sequence Diagram for user launch
+
+![Use case](readme/launch_app.png)
+
