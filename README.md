@@ -1,5 +1,6 @@
 # A research project in indoor navigation using IBeacon technology, with a focus on the blind or partially sighted
 
+
 ## Requirements
 
 * Android application
