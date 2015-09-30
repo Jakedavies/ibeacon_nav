@@ -43,7 +43,7 @@
 
 Todo Item | Scheduled Completion | Completion Date
 --------- | -------------------- | ---------------
-Basic App / Basic Diagrams / Features / Requirments | September 29th, 2015 | N/A
+Basic App / Basic Diagrams / Features / Requirments | September 29th, 2015 | September 29th, 2015
 Menus and UI    | October 13th, 2015 | N/A
 Heading/direction tracking | October 20th, 2015 | N/A
 Testing/development of feedback system | October 27th, 2015 | N/A
@@ -68,4 +68,8 @@ Presentation | April 14th, 2016 | N/A
 ### Use Case
 
 ![Use case](readme/use_case.png)
+
+### Sequence Diagram for app launch
+
+![Use case](readme/launch_app.png)
 
