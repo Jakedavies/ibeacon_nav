@@ -3,6 +3,9 @@
 
     <color name="primary">#ffcdcdcd</color>
     <color name="primary_dark">#ffaeaeae</color>
+    <color name="light_background">#ffaeaeae</color>
+    <color name="material_teal">#009688</color>
     <color name="black">#ff050505</color>
+    <color name="white">#ffffff</color>
 
 </resources>

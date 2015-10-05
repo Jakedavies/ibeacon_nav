@@ -6,31 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
-import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
-import java.util.Collections;
-import java.util.List;
-
-
-import com.estimote.sdk.BeaconManager;
 
 import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class AvailableBeaconFragment extends Fragment {
 
     private BeaconManager beaconManager;
     private String scanId;
@@ -38,7 +26,7 @@ public class MainActivityFragment extends Fragment {
     private BeaconListAdapter adapter;
     private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
 
-    public MainActivityFragment() {
+    public AvailableBeaconFragment() {
     }
 
     @Override
@@ -52,7 +40,7 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 ;
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
+        View v = inflater.inflate(R.layout.fragment_available_beacon, container, false);
         adapter = new BeaconListAdapter(this.getContext());
         ListView list = (ListView) v.findViewById(R.id.device_list);
         list.setAdapter(adapter);

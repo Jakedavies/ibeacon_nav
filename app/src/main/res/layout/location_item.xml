@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/primary">
+
+    <TextView
+        android:tag="mac"
+        android:id="@+id/location_name"
+        android:height="50dp"
+        android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Device Name"
+        />
+</LinearLayout>
