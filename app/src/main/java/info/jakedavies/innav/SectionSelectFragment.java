@@ -65,7 +65,7 @@ public class SectionSelectFragment extends Fragment {
         sectionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // launch the navigation activity here with the location and section set
+                // launch the navigation activity here
             }
         });
         return v;
