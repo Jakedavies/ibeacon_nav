@@ -6,4 +6,6 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Closed</string>
     <string name="select_section">Select a section</string>
+    <string name="volume_icon">Volume icon</string>
+    <string name="vibration_icon">Vibration_icon</string>
 </resources>
