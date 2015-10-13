@@ -65,7 +65,14 @@ public class SectionSelectFragment extends Fragment {
         sectionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // launch the navigation activity here
+                        NavigationFragment newFragment = new NavigationFragment();
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                        transaction.replace(R.id.fragment_container, newFragment);
+                        transaction.addToBackStack(null);
+
+                        // Commit the transaction
+                        transaction.commit();
             }
         });
         return v;

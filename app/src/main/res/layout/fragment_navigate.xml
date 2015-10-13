@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:gravity="center"
-            android:text="@string/select_section"
+            android:text="Navigating to the Deli section"
             android:textColor="@color/white"
             android:textSize="12sp"/>
     </LinearLayout>
