@@ -65,9 +65,9 @@ Presentation | April 14th, 2016 | N/A
 
 ## UML
 
-### Use Case
+### Class Diagram
 
-![Use case](readme/use_case.png)
+![Use case](readme/class_diagram.png)
 
 ### Sequence Diagram for app launch
 
