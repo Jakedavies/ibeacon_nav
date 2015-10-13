@@ -25,11 +25,14 @@
 * User should be able to select their location
 * User should be able to select a section in their location to navigate to
 * User should be able to get feedback on how far they are from their destination
+* User should be able to cancel navigation and re-select location or section
 * A server should host config details for locations so that users can easily navigate a new location
 
 ### functional requirements
 * App should be able to know its position within +-2 meters of the actual position indoors
 * App should be easily deployable to a new location through a config file
+* Config file documented be clearly defined and documented
+* 
 
 ## Challenges
 
