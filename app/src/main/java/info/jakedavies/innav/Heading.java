@@ -7,13 +7,18 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
+/**
+ * Used as a reference under apache 2.0
+ * http://www.netmite.com/android/mydroid/cupcake/development/samples/Compass/src/com/example/android/compass/CompassActivity.java
+ */
+
 public class Heading implements SensorEventListener {
 
     private SensorManager mSensorManager;
 
     private long mLastUpdate;
-    //update ever 300 seconds
-    private int mUpdateFrequency = 300;
+
+    private int mUpdateFrequency = 300; //update the sensor every 300 seconds
     private HeadingChangedListener mCallback;
 
     private float[] mGravity;
