@@ -1,7 +1,7 @@
 # A research project in indoor navigation using IBeacon technology, with a focus on the blind or partially sighted
 
 
-## Requirements
+## Features
 
 * Android application
   * Indoor location tracking using iBeacon 
@@ -16,6 +16,23 @@
   * Hosts locations for android application to download
   * Ability to upload/define new loctations 
   * 
+
+## Requirements
+
+### Non-functional Requirements
+* User should be able to navigate app without sight
+* User should be able to select between haptic and audio feedback
+* User should be able to select their location
+* User should be able to select a section in their location to navigate to
+* User should be able to get feedback on how far they are from their destination
+* User should be able to cancel navigation and re-select location or section
+* A server should host config details for locations so that users can easily navigate a new location
+
+### functional requirements
+* App should be able to know its position within +-2 meters of the actual position indoors
+* App should be easily deployable to a new location through a config file
+* Config file documented be clearly defined and documented
+* 
 
 ## Challenges
 
@@ -65,9 +82,9 @@ Presentation | April 14th, 2016 | N/A
 
 ## UML
 
-### Use Case
+### Class Diagram
 
-![Use case](readme/use_case.png)
+![Use case](readme/class_diagram.png)
 
 ### Sequence Diagram for app launch
 
