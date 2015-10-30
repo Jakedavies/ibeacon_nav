@@ -1,4 +1,4 @@
-package info.jakedavies.innav;
+package info.jakedavies.innav.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import info.jakedavies.innav.R;
 
 /**
  * Created by jakedavies on 15-10-05.

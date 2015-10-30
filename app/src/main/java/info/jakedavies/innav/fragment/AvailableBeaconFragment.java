@@ -1,4 +1,4 @@
-package info.jakedavies.innav;
+package info.jakedavies.innav.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +14,9 @@ import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 
 import java.util.List;
+
+import info.jakedavies.innav.adapter.BeaconListAdapter;
+import info.jakedavies.innav.R;
 
 /**
  * A placeholder fragment containing a simple view.

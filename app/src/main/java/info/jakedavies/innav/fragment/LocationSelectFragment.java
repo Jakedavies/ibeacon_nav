@@ -1,6 +1,5 @@
-package info.jakedavies.innav;
+package info.jakedavies.innav.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -9,27 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.RemoteException;
-import android.util.Log;
-import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.Toast;
-import com.estimote.sdk.Beacon;
-import com.estimote.sdk.BeaconManager;
-import com.estimote.sdk.Region;
-import java.util.Collections;
-import java.util.List;
 
 
-import com.estimote.sdk.BeaconManager;
-
-import java.util.List;
+import info.jakedavies.innav.adapter.LocationListAdapter;
+import info.jakedavies.innav.R;
 
 /**
  * A placeholder fragment containing a simple view.

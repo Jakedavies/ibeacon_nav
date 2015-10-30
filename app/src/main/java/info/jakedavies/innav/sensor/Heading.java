@@ -1,4 +1,4 @@
-package info.jakedavies.innav;
+package info.jakedavies.innav.sensor;
 
 import android.content.Context;
 import android.hardware.Sensor;

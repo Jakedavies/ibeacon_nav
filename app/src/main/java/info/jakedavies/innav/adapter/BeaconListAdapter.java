@@ -1,4 +1,4 @@
-package info.jakedavies.innav;
+package info.jakedavies.innav.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.Utils;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import info.jakedavies.innav.R;
 
 
 /**
