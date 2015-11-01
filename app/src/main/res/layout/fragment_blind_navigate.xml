@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:background="@color/material_teal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="5dp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:text="University"
+            android:id="@+id/location_name" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:text="Navigating to the Deli section"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:baselineAligned="false"
+            android:layout_height="200dp">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight=".5"
+                android:layout_margin="1dp"
+                android:layout_height="fill_parent"
+                android:background="@color/primary"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:contentDescription="@string/volume_icon"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_volume_up_black_24dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight=".5"
+                android:layout_margin="1dp"
+                android:layout_height="fill_parent"
+                android:background="@color/primary"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:contentDescription="@string/vibration_icon"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_vibration_black_24dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/map">
+            <info.jakedavies.innav.view.Map
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </LinearLayout>
+    </LinearLayout>
+
 
 </LinearLayout>
