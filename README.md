@@ -58,11 +58,11 @@
 
 ## Timeline
 
-Todo Item | Scheduled Completion | Completion Date
+Todo Item | Scheduled Completion | Status
 --------- | -------------------- | ---------------
 Basic App / Basic Diagrams / Features / Requirments | September 29th, 2015 | September 29th, 2015
 Menus and UI    | October 13th, 2015 | N/A
-Heading/direction tracking | October 20th, 2015 | N/A
+Heading/direction tracking | October 20th, 2015 | [Completed](milestones/oct20-2015.md)
 Testing/development of feedback system | October 27th, 2015 | N/A
 Implementation of feedback system into application | November 3rd, 2015 | N/A
 Triangulation testing and algorithm development | November 17th, 2015 | N/A
