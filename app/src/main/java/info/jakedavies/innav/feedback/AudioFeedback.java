@@ -1,32 +1,62 @@
 package info.jakedavies.innav.feedback;
 
-import android.os.Vibrator;
+import android.content.Context;
+import android.media.AudioManager;
+import android.speech.tts.TextToSpeech;
+
+import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Created by jakedavies on 15-10-30.
  */
-public class AudioFeedback implements FeedbackInterface {
+public class AudioFeedback implements FeedbackInterface, TextToSpeech.OnInitListener {
 
-    private Vibrator vibrator;
-    private long[] leftPattern = {50, 250, 500};
-    private long[] rightPattern = {500, 250, 50};
+    private TextToSpeech tts;
+    private boolean ready = false;
 
-    AudioFeedback(Vibrator v){
-        vibrator = v;
+    AudioFeedback(Context context){
+        tts = new TextToSpeech(context, this);
     }
 
     @Override
     public void turnLeft() {
-        vibrator.vibrate(leftPattern, 1);
+        speak("Turn Left");
     }
 
     @Override
     public void turnRight() {
-        vibrator.vibrate(rightPattern, 1);
+        speak("Turn Right");
     }
 
     @Override
     public void straight(int x) {
-        // if your going the right direction no input is needed?
+        speak("Move "+x+" meters forward");
+    }
+    private void speak(String text){
+        // Speak only if the TTS is ready
+        // and the user has allowed speech
+
+        if(ready) {
+            HashMap<String, String> hash = new HashMap<>();
+            hash.put(TextToSpeech.Engine.KEY_PARAM_STREAM,
+                    String.valueOf(AudioManager.STREAM_NOTIFICATION));
+            tts.speak(text, TextToSpeech.QUEUE_ADD, hash);
+        }
+    }
+    public void destroy(){
+        tts.shutdown();
+    }
+
+    @Override
+    public void onInit(int status) {
+        if(status == TextToSpeech.SUCCESS){
+            // Change this to match your
+            // locale
+            tts.setLanguage(Locale.CANADA);
+            ready = true;
+        }else{
+            ready = false;
+        }
     }
 }

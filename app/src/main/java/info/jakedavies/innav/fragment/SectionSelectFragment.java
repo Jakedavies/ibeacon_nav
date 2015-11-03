@@ -50,7 +50,7 @@ public class SectionSelectFragment extends Fragment {
         sectionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        NavigationFragment newFragment = new NavigationFragment();
+                        Fragment newFragment = new BlindNavigationFragment();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                         transaction.replace(R.id.fragment_container, newFragment);
