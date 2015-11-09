@@ -30,8 +30,8 @@ public class Map extends View{
     long lastUpdate;
     private long updateFrequency = 100;
 
-    public Map(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public Map(Context context) {
+        super(context);
         Log.d("HALP", "startng");
         paint = new Paint();
         paint.setColor(Color.BLACK);
@@ -90,6 +90,10 @@ public class Map extends View{
                     break;
             }
         }
+        return true;
+    }
+    public boolean translateToPosition(int degrees){
+
         return true;
     }
     private boolean collidesWithObstacle(float x, float y){
