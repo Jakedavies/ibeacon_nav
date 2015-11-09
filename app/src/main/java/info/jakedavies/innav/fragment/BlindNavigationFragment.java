@@ -9,17 +9,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import info.jakedavies.innav.R;
+import info.jakedavies.innav.sensor.Heading;
 import info.jakedavies.innav.view.Map;
 
 /**
  * Created by jakedavies on 15-10-30.
  */
-public class BlindNavigationFragment extends Fragment {
+public class BlindNavigationFragment extends Fragment implements Heading.HeadingChangedListener {
 
-    Map mapView;
+    private Map mapView;
+    private Heading  mSensor;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        mSensor = new Heading(getActivity().getApplication().getApplicationContext(), this);
     }
 
     @Override
@@ -38,6 +41,21 @@ public class BlindNavigationFragment extends Fragment {
         mapLayout.addView(mapView);
 
         return v;
+    }
+    @Override
+    public void onStart(){
+        mSensor.registerListener();
+    }
+
+    @Override
+    public void onStop(){
+        mSensor.unregisterListener();
+    }
+
+    @Override
+    public void headingChanged(int heading) {
+
+        mapView.translateToPosition(heading);
     }
 
     // heading sensor update event should push event to mapview to modify view
