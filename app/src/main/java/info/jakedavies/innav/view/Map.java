@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.Vibrator;
 import android.util.AttributeSet;
@@ -32,9 +33,10 @@ public class Map extends View{
 
     public Map(Context context) {
         super(context);
-        Log.d("HALP", "startng");
         paint = new Paint();
         paint.setColor(Color.BLACK);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(5);
 
         paint2 = new Paint();
         paint2.setColor(Color.BLUE);
@@ -48,20 +50,35 @@ public class Map extends View{
         int tenPercentWide = width/10;
         int tenPercentHigh = height/10;
         obstacles.add(new Rect(2 * tenPercentWide, 3 * tenPercentHigh, 4 * tenPercentWide, 4 * tenPercentHigh));
-        obstacles.add(new Rect(5 *tenPercentWide, 3*tenPercentHigh, 7*tenPercentWide, 4*tenPercentHigh));
+        obstacles.add(new Rect(5 * tenPercentWide, 3 * tenPercentHigh, 7 * tenPercentWide, 4 * tenPercentHigh));
         obstacles.add(new Rect(8 * tenPercentWide, 3 * tenPercentHigh, 9 * tenPercentWide, 4 * tenPercentHigh));
 
-        obstacles.add(new Rect(2*tenPercentWide, 6*tenPercentHigh, 4*tenPercentWide, 7*tenPercentHigh));
+        obstacles.add(new Rect(2 * tenPercentWide, 6 * tenPercentHigh, 4 * tenPercentWide, 7 * tenPercentHigh));
         obstacles.add(new Rect(5 * tenPercentWide, 6 * tenPercentHigh, 7 * tenPercentWide, 7 * tenPercentHigh));
         obstacles.add(new Rect(8 * tenPercentWide, 6 * tenPercentHigh, 9 * tenPercentWide, 7 * tenPercentHigh));
 
         obstacles.add(new Rect(2 * tenPercentWide, 0 * tenPercentHigh, 10 * tenPercentWide, 2 * tenPercentHigh));
     }
 
+    private Path rectToPath(Rect rect){
+        Path p = new Path();
+        
+        p.moveTo(rect.left, rect.top);
+        p.lineTo(rect.right, rect.top);
+        p.moveTo(rect.right, rect.top);
+        p.lineTo(rect.right, rect.bottom);
+        p.moveTo(rect.right, rect.bottom);
+        p.lineTo(rect.left, rect.bottom);
+        p.moveTo(rect.left, rect.bottom);
+        p.lineTo(rect.left, rect.top);
+        p.close();
+        return p;
+    };
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
         for(Rect obstacle : obstacles){
+            canvas.drawPath(rectToPath(obstacle), paint);
             canvas.drawRect(obstacle, paint);
         }
         canvas.drawCircle(width/10 *5, height/10 *9, width/20, paint2);

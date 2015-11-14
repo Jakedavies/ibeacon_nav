@@ -41,11 +41,13 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     }
     @Override
     public void onStart(){
+        super.onStart();
         mSensor.registerListener();
     }
 
     @Override
     public void onStop(){
+        super.onStop();
         mSensor.unregisterListener();
     }
 

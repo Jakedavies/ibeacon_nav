@@ -2,13 +2,14 @@ package info.jakedavies.innav.lib.floorplan;
 
 import java.util.ArrayList;
 
-/**
- * Created by jakedavies on 15-11-10.
- */
+
 public class Floorplan {
 
     ArrayList<FloorplanObject> objects;
-    public Floorplan(){
+    int floorWidth;
+    int floorHeight;
+
+    public Floorplan(int width, int height){
         objects = new ArrayList<>();
     }
     public void addObjectToFloorplan(FloorplanObject o){

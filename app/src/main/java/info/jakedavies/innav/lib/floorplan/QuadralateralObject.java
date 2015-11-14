@@ -25,6 +25,7 @@ public class QuadralateralObject implements FloorplanObject {
     @Override
     public Rect getShape() {
         Rect r = new Rect();
-    }i
+        return r;
+    }
 
 }

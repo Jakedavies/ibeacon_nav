@@ -5,8 +5,6 @@ import java.io.*;
 import android.content.res.Resources;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 
 /**
@@ -52,15 +50,4 @@ public class JSONResourceReader {
         jsonString = writer.toString();
     }
 
-    /**
-     * Build an object from the specified JSON resource using Gson.
-     *
-     * @param type The type of the object to build.
-     *
-     * @return An object of type T, with member fields populated using Gson.
-     */
-    public <T> T constructUsingGson(Class<T> type) {
-        Gson gson = new GsonBuilder().create();
-        return gson.fromJson(jsonString, type);
-    }
 }
