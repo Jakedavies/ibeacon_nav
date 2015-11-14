@@ -12,9 +12,6 @@ import info.jakedavies.innav.R;
 import info.jakedavies.innav.sensor.Heading;
 import info.jakedavies.innav.view.Map;
 
-/**
- * Created by jakedavies on 15-10-30.
- */
 public class BlindNavigationFragment extends Fragment implements Heading.HeadingChangedListener {
 
     private Map mapView;
