@@ -1,21 +1,23 @@
 package info.jakedavies.innav.lib.floorplan;
 
+import android.graphics.Rect;
+
 import java.util.ArrayList;
 
 
 public class Floorplan {
 
-    ArrayList<FloorplanObject> objects;
+    ArrayList<Rect> objects;
     int floorWidth;
     int floorHeight;
 
     public Floorplan(int width, int height){
-        objects = new ArrayList<>();
+        objects = new ArrayList<Rect>();
     }
-    public void addObjectToFloorplan(FloorplanObject o){
+    public void addObjectToFloorplan(Rect o){
         objects.add(o);
     }
-    public ArrayList getObjects(){
+    public ArrayList<Rect> getObjects(){
         return objects;
     }
 }

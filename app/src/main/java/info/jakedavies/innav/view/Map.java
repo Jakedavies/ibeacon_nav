@@ -15,6 +15,9 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import info.jakedavies.innav.lib.FloorplanCamera;
+import info.jakedavies.innav.lib.floorplan.Floorplan;
+
 
 /**
  * Created by jakedavies on 15-11-01.
@@ -28,6 +31,8 @@ public class Map extends View{
     Paint paint2;
     Context context;
     Vibrator vibrator;
+    FloorplanCamera camera ;
+    private Floorplan fp;
     long lastUpdate;
     private long updateFrequency = 100;
 
@@ -47,39 +52,28 @@ public class Map extends View{
     }
 
     private void init(){
-        int tenPercentWide = width/10;
-        int tenPercentHigh = height/10;
-        obstacles.add(new Rect(2 * tenPercentWide, 3 * tenPercentHigh, 4 * tenPercentWide, 4 * tenPercentHigh));
-        obstacles.add(new Rect(5 * tenPercentWide, 3 * tenPercentHigh, 7 * tenPercentWide, 4 * tenPercentHigh));
-        obstacles.add(new Rect(8 * tenPercentWide, 3 * tenPercentHigh, 9 * tenPercentWide, 4 * tenPercentHigh));
+        int fpHeight = 1000;
+        int fpWidth = 1000;
+        fp = new Floorplan(fpWidth, fpHeight);
+        for(int i = 0; i< fpWidth; i = i+50){
+            for(int j =0; j < fpWidth; j = j+50){
+                if(i%100 == 0 && j % 100 == 0)
+                    fp.addObjectToFloorplan(new Rect(i, j, i+50, j+50));
+            }
+        }
+        camera = new FloorplanCamera(fp);
+        camera.setViewSize(300);
+        camera.setPhonePos(500, 500);
 
-        obstacles.add(new Rect(2 * tenPercentWide, 6 * tenPercentHigh, 4 * tenPercentWide, 7 * tenPercentHigh));
-        obstacles.add(new Rect(5 * tenPercentWide, 6 * tenPercentHigh, 7 * tenPercentWide, 7 * tenPercentHigh));
-        obstacles.add(new Rect(8 * tenPercentWide, 6 * tenPercentHigh, 9 * tenPercentWide, 7 * tenPercentHigh));
-
-        obstacles.add(new Rect(2 * tenPercentWide, 0 * tenPercentHigh, 10 * tenPercentWide, 2 * tenPercentHigh));
     }
 
-    private Path rectToPath(Rect rect){
-        Path p = new Path();
-        
-        p.moveTo(rect.left, rect.top);
-        p.lineTo(rect.right, rect.top);
-        p.moveTo(rect.right, rect.top);
-        p.lineTo(rect.right, rect.bottom);
-        p.moveTo(rect.right, rect.bottom);
-        p.lineTo(rect.left, rect.bottom);
-        p.moveTo(rect.left, rect.bottom);
-        p.lineTo(rect.left, rect.top);
-        p.close();
-        return p;
-    };
+
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        for(Rect obstacle : obstacles){
-            canvas.drawPath(rectToPath(obstacle), paint);
-            canvas.drawRect(obstacle, paint);
+        for(Path obstacle : camera.getCameraView()){
+            canvas.drawPath(obstacle, paint);
+//            canvas.drawRect(obstacle, paint);
         }
         canvas.drawCircle(width/10 *5, height/10 *9, width/20, paint2);
     }
@@ -88,6 +82,7 @@ public class Map extends View{
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
+        camera.setPhoneDimensions(widthMeasureSpec, height);
         init();
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import info.jakedavies.innav.R;
+import info.jakedavies.innav.lib.floorplan.Floorplan;
 import info.jakedavies.innav.sensor.Heading;
 import info.jakedavies.innav.view.Map;
 
@@ -18,6 +19,8 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     private Heading  mSensor;
     @Override
     public void onCreate(Bundle savedInstanceState){
+
+
         super.onCreate(savedInstanceState);
         mSensor = new Heading(getActivity().getApplication().getApplicationContext(), this);
     }
