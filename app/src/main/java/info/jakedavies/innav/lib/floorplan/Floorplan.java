@@ -20,4 +20,11 @@ public class Floorplan {
     public ArrayList<Rect> getObjects(){
         return objects;
     }
+    public int getWidth(){
+        return floorWidth;
+    }
+    public int getHeight(){
+        return floorHeight;
+    }
+
 }

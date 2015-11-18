@@ -61,9 +61,7 @@ public class Map extends View{
                     fp.addObjectToFloorplan(new Rect(i, j, i+50, j+50));
             }
         }
-        camera = new FloorplanCamera(fp);
-        camera.setViewSize(300);
-        camera.setPhonePos(500, 500);
+
 
     }
 
@@ -71,20 +69,17 @@ public class Map extends View{
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        for(Path obstacle : camera.getCameraView()){
-            canvas.drawPath(obstacle, paint);
-//            canvas.drawRect(obstacle, paint);
-        }
-        canvas.drawCircle(width/10 *5, height/10 *9, width/20, paint2);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
-        camera.setPhoneDimensions(widthMeasureSpec, height);
-        init();
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+    @Override
+    protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld){
+        super.onSizeChanged(xNew, yNew, xOld, yOld);
     }
 
     @Override
