@@ -1,5 +1,6 @@
 package info.jakedavies.innav.lib;
 
+import android.graphics.Point;
 import android.util.Log;
 
 import junit.framework.TestCase;
@@ -28,7 +29,14 @@ public class CameraTest extends TestCase {
     public void testGetRotatedPoint() throws Exception{
         Camera c = new Camera();
 
-        Log.d("FUCKFUCK", ""+c.getRotatedPoint(25, 55, -45).x);
-        Log.d("FUCKFUCK", ""+c.getRotatedPoint(25, 55, -45).y);
+        Point p = c.getRotatedPoint(20, 10, 45);
+        Log.d("CameraTest", p.toString());
+        p = c.getRotatedPoint(30, 10, 45);
+        Log.d("CameraTest", p.toString());
+
+        p = c.getRotatedPoint(20, 10, 180);
+        Log.d("CameraTest", p.toString());
+        p = c.getRotatedPoint(30, 10, 180);
+        Log.d("CameraTest", p.toString());
     }
 }

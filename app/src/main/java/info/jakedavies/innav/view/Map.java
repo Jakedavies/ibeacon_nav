@@ -4,19 +4,15 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.Vibrator;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import info.jakedavies.innav.lib.FloorplanCamera;
-import info.jakedavies.innav.lib.floorplan.Floorplan;
+import info.jakedavies.innav.lib.Camera;
 
 
 /**
@@ -31,8 +27,7 @@ public class Map extends View{
     Paint paint2;
     Context context;
     Vibrator vibrator;
-    FloorplanCamera camera ;
-    private Floorplan fp;
+    Camera c = new Camera();
     long lastUpdate;
     private long updateFrequency = 100;
 
@@ -40,7 +35,7 @@ public class Map extends View{
         super(context);
         paint = new Paint();
         paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(5);
 
         paint2 = new Paint();
@@ -52,16 +47,6 @@ public class Map extends View{
     }
 
     private void init(){
-        int fpHeight = 1000;
-        int fpWidth = 1000;
-        fp = new Floorplan(fpWidth, fpHeight);
-        for(int i = 0; i< fpWidth; i = i+50){
-            for(int j =0; j < fpWidth; j = j+50){
-                if(i%100 == 0 && j % 100 == 0)
-                    fp.addObjectToFloorplan(new Rect(i, j, i+50, j+50));
-            }
-        }
-
 
     }
 
@@ -69,17 +54,22 @@ public class Map extends View{
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
+        for(Rect r : c.getCameraView()){
+            canvas.drawRect(r, paint);
+        }
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
+
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
     @Override
     protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld){
         super.onSizeChanged(xNew, yNew, xOld, yOld);
+        c.setPhonePixels(xNew, yNew);
     }
 
     @Override
@@ -100,7 +90,8 @@ public class Map extends View{
         return true;
     }
     public boolean translateToPosition(int degrees){
-
+        c.setPhoneRotation(degrees);
+        this.invalidate();
         return true;
     }
     private boolean collidesWithObstacle(float x, float y){
