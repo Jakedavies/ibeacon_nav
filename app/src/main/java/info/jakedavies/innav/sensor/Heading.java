@@ -7,6 +7,11 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 /**
  * Used as a reference under apache 2.0
  * http://www.netmite.com/android/mydroid/cupcake/development/samples/Compass/src/com/example/android/compass/CompassActivity.java
@@ -20,9 +25,11 @@ public class Heading implements SensorEventListener {
 
     private int mUpdateFrequency = 300; //update the sensor every 300 seconds
     private HeadingChangedListener mCallback;
+    int stacksize = 3;
 
     private float[] mGravity;
     private float[] mMagnetic;
+    private LinkedList<Integer> averageStack = new LinkedList<Integer>();
 
     public interface HeadingChangedListener {
         void headingChanged(int heading);
@@ -64,9 +71,23 @@ public class Heading implements SensorEventListener {
                     SensorManager.getOrientation(R, orientation);
                     float inRads = orientation[0];
                     int inDegs = (int)(Math.toDegrees(inRads) + 360) % 360;
-
+                    averageStack.push(inDegs);
                     if (null != mCallback) {
-                        mCallback.headingChanged(inDegs);
+                        if(averageStack.size() >=stacksize){
+                            int result = 0;
+                            int total = 0;
+                            for (int i:
+                                 averageStack) {
+                                total+=i;
+                            }
+                            if(averageStack.size()> 0){
+                                if(averageStack.size() > stacksize){
+                                    averageStack.poll();
+                                }
+                                result = total/averageStack.size();
+                            }
+                            mCallback.headingChanged(result);
+                        }
                     }
                 }
             }

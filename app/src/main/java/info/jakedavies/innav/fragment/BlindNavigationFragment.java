@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import info.jakedavies.innav.R;
 import info.jakedavies.innav.lib.floorplan.Floorplan;
 import info.jakedavies.innav.sensor.Heading;
@@ -17,10 +19,9 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
 
     private Map mapView;
     private Heading  mSensor;
+    private TextView degree;
     @Override
     public void onCreate(Bundle savedInstanceState){
-
-
         super.onCreate(savedInstanceState);
         mSensor = new Heading(getActivity().getApplication().getApplicationContext(), this);
     }
@@ -36,10 +37,10 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         mapView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT));
+        degree = (TextView) v.findViewById(R.id.degree);
 
         // by programmatically adding the view we can maintain a pointer to the view and modify data
         mapLayout.addView(mapView);
-
         return v;
     }
     @Override
@@ -56,7 +57,7 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
 
     @Override
     public void headingChanged(int heading) {
-
+        degree.setText(String.valueOf(heading));
         mapView.translateToPosition(heading);
     }
 

@@ -68,8 +68,17 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/map">
-
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:textSize="20dp"
+                android:background="#5d6ba3b7"
+                android:id="@+id/degree"
+                android:layout_gravity="right" />
         </LinearLayout>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp" />
     </LinearLayout>
 
 

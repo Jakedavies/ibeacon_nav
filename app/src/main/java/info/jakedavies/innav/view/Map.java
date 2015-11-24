@@ -11,6 +11,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 
 import info.jakedavies.innav.lib.Camera;
 
@@ -78,7 +79,7 @@ public class Map extends View{
         if(System.currentTimeMillis() - lastUpdate > updateFrequency){
             switch (e.getAction()) {
                 case MotionEvent.ACTION_MOVE:
-                    if(collidesWithObstacle(e.getX(), e.getY())){
+                    if(c.blocked(Math.round(e.getX()), Math.round(e.getY()))){
                         vibrator.vibrate(50);
                     }
                     break;

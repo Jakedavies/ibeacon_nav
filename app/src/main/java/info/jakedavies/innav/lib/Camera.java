@@ -26,13 +26,20 @@ public class Camera {
     private int degrees;
 
     public Camera(){
+        initFloorplan();
+    }
+    public void initFloorplan(){
         for(int i =0; i < floorplan.length; i++){
             for(int j =0; j < floorplan[i].length; j++){
-                if( i % 3 ==0 || i % 4 ==0){
+                floorplan[i][j] = false;
+            }
+        }
+        int blockWidth = 50;
+
+        for(int i = 0; i< floorplan.length; i++){
+            for(int j = 0; j < floorplan.length; j++){
+                if((i/blockWidth) % 2 ==0 && (j/blockWidth) % 2 ==0){
                     floorplan[i][j] = true;
-                }
-                else{
-                    floorplan[i][j] = false;
                 }
             }
         }
@@ -63,6 +70,14 @@ public class Camera {
             }
         }
         return out;
+    }
+    public boolean blocked(int clickX, int clickY){
+        Point p = getRotatedPoint(phoneLeft+(clickX/ppu), phoneTop+(clickY/ppu), degrees);
+        if(floorplan[p.x][p.y]){
+            return true;
+        }else{
+            return false;
+        }
     }
     // use this method on every point currently displayed on the phone, then get what should be in that point
     public Point getRotatedPoint(int x,int y, int degrees){
