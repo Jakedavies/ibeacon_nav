@@ -65,11 +65,11 @@ Menus and UI    | October 13th, 2015 | N/A
 Heading/direction tracking | October 20th, 2015 | [Completed](milestones/oct20-2015.md)
 Testing/development of feedback system | November 3rd, 2015 |[Completed](milestones/nov3-2015.md)
 Implementation of feedback system into application | November 24th, 2015 | [Incomplete](milestones/nov3-2015.md) [Completed](milestones/nov3-2015.md)
-Triangulation testing and algorithm development | December 1st, 2015 | N/A
-Implementation of the triangulation method into application | December 8th, 2015 | N/A
-Ability to navigate to specific section of store | December 15th, 2015 | N/A
-Create a configuration format for locations and interpret on device | Jan 5th, 2015 | N/A
-Setup up location configuration server for device to pull locations from | Jan 12th, 2016| N/A
+Triangulation testing and algorithm development | December 8th, 2015 | N/A
+Implementation of the triangulation method into application | December 15th, 2015 | N/A
+Prototype with ability to navigate from point to point | Jan 5th, 2015 | N/A
+Create a configuration format for locations and interpret on device | Jan 12th, 2015 | N/A
+Setup up location configuration server for device to pull locations from | Jan 17th, 2016| N/A
 Extra Time (Possibly increase test coverage/fix bugs) | Feb 2nd, 2016| N/A
 Thesis | March 15th, 2016 | N/A
 Presentation Prep| April 5th, 2016 | N/A
