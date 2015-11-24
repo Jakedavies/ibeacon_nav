@@ -64,7 +64,7 @@ Basic App / Basic Diagrams / Features / Requirments | September 29th, 2015 | Sep
 Menus and UI    | October 13th, 2015 | N/A
 Heading/direction tracking | October 20th, 2015 | [Completed](milestones/oct20-2015.md)
 Testing/development of feedback system | November 3rd, 2015 |[Completed](milestones/nov3-2015.md)
-Implementation of feedback system into application | November 24th, 2015 | [Incomplete](milestones/nov3-2015.md)[Completed](milestones/nov3-2015.md)
+Implementation of feedback system into application | November 24th, 2015 | [Incomplete](milestones/nov3-2015.md) [Completed](milestones/nov3-2015.md)
 Triangulation testing and algorithm development | December 1st, 2015 | N/A
 Implementation of the triangulation method into application | December 8th, 2015 | N/A
 Ability to navigate to specific section of store | December 15th, 2015 | N/A
