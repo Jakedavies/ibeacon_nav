@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by jakedavies on 15-11-17.
  */
 public class Camera {
-    private boolean[][] floorplan = new boolean[2001][2001];
+    private MapByte[][] floorplan = new MapByte[2001][2001];
     private int ppu = 10;
     private int pWidth;
     private int pHeight;
@@ -29,24 +29,25 @@ public class Camera {
         initFloorplan();
     }
     public void initFloorplan(){
-        for(int i =0; i < floorplan.length; i++){
-            for(int j =0; j < floorplan[i].length; j++){
-                floorplan[i][j] = false;
-            }
-        }
         int blockWidth = 50;
 
         for(int i = 0; i< floorplan.length; i++){
             for(int j = 0; j < floorplan.length; j++){
+                floorplan[i][j] = new MapByte();
+            }
+        }
+
+        for(int i = 0; i< floorplan.length; i++){
+            for(int j = 0; j < floorplan.length; j++){
                 if((i/blockWidth) % 2 ==0 && (j/blockWidth) % 2 ==0){
-                    floorplan[i][j] = true;
+                    floorplan[i][j].setObstacle(true);
                 }
             }
         }
     }
     public void setPhoneRotation(int d){
         Log.d("CAMERA", "Rotating");
-        degrees =d;
+        degrees = d;
     }
     public void setPhonePixels(int width, int height){
         pWidth = width;
@@ -57,14 +58,13 @@ public class Camera {
         phoneLeft = phoneX-(phoneXU/2);
         phoneRight = phoneX+(phoneXU/2);
         phoneTop = phoneY+phoneYU;
-
     }
     public ArrayList<Rect> getCameraView(){
         ArrayList<Rect> out = new ArrayList<>();
         for(int x =0; x < phoneXU; x++){
             for(int y =0; y < phoneYU; y++){
                 Point p = getRotatedPoint(phoneLeft+x, phoneTop+y, degrees);
-                if(floorplan[p.x][p.y]){
+                if(floorplan[p.x][p.y].isObstacle()){
                     out.add(new Rect(x*ppu, y*ppu, (x+1)*ppu,(y+1)*ppu));
                 }
             }
@@ -73,11 +73,7 @@ public class Camera {
     }
     public boolean blocked(int clickX, int clickY){
         Point p = getRotatedPoint(phoneLeft+(clickX/ppu), phoneTop+(clickY/ppu), degrees);
-        if(floorplan[p.x][p.y]){
-            return true;
-        }else{
-            return false;
-        }
+        return floorplan[p.x][p.y].isObstacle();
     }
     // use this method on every point currently displayed on the phone, then get what should be in that point
     public Point getRotatedPoint(int x,int y, int degrees){
