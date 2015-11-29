@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 
 import info.jakedavies.innav.lib.Camera;
+import info.jakedavies.innav.lib.PaintedRect;
 
 
 /**
@@ -31,6 +32,7 @@ public class Map extends View{
     Camera c = new Camera();
     long lastUpdate;
     private long updateFrequency = 100;
+    Paint[] paints = new Paint[3];
 
     public Map(Context context) {
         super(context);
@@ -41,6 +43,24 @@ public class Map extends View{
 
         paint2 = new Paint();
         paint2.setColor(Color.BLUE);
+
+        paints[0] = new Paint();
+        paints[0].setColor(Color.GREEN);
+        paints[0].setAlpha(50);
+        paints[0].setStyle(Paint.Style.FILL);
+        paints[0].setStrokeWidth(5);
+
+        paints[1] = new Paint();
+        paints[1].setColor(Color.BLACK);
+        paints[1].setAlpha(50);
+        paints[1].setStyle(Paint.Style.FILL);
+        paints[1].setStrokeWidth(5);
+
+        paints[2] = new Paint();
+        paints[2].setColor(Color.RED);
+        paints[2].setAlpha(50);
+        paints[2].setStyle(Paint.Style.FILL);
+        paints[2].setStrokeWidth(5);
 
         lastUpdate = System.currentTimeMillis();
         vibrator = (Vibrator) context.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
@@ -55,8 +75,8 @@ public class Map extends View{
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        for(Rect r : c.getCameraView()){
-            canvas.drawRect(r, paint);
+        for(PaintedRect r : c.getCameraView()){
+            canvas.drawRect(r.getRect(), paints[r.getPaint()]);
         }
     }
 

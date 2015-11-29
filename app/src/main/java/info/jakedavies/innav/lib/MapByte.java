@@ -23,6 +23,9 @@ public class MapByte {
     public void setIsle(boolean value){
         setBit(2, value);
     }
+    public boolean isIsle(){
+        return bitVal(2);
+    }
     //bit 3
     public void setBit3(boolean value){
         setBit(3, value);
@@ -39,7 +42,7 @@ public class MapByte {
         }
     }
     private boolean bitVal(int bitNum){
-        return b << bitNum != 0;
+        return (b & (1L << bitNum)) != 0;
     }
     public byte getByte(){
         return b;
