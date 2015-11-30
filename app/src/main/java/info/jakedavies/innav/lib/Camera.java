@@ -86,9 +86,15 @@ public class Camera {
         }
         return out;
     }
-    public boolean blocked(int clickX, int clickY){
+    public int blocked(int clickX, int clickY){
         Point p = getRotatedPoint(phoneLeft+(clickX/ppu), phoneTop+(clickY/ppu), degrees);
-        return floorplan[p.x][p.y].isObstacle();
+        if(floorplan[p.x][p.y].isObstacle()){
+            return 50;
+        }if(floorplan[p.x][p.y].isIsle()){
+            return 20;
+        }else{
+            return -1;
+        }
     }
     // use this method on every point currently displayed on the phone, then get what should be in that point
     public Point getRotatedPoint(int x,int y, int degrees){

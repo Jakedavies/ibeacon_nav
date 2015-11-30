@@ -99,8 +99,10 @@ public class Map extends View{
         if(System.currentTimeMillis() - lastUpdate > updateFrequency){
             switch (e.getAction()) {
                 case MotionEvent.ACTION_MOVE:
-                    if(c.blocked(Math.round(e.getX()), Math.round(e.getY()))){
-                        vibrator.vibrate(50);
+                    int vibration = c.blocked(Math.round(e.getX()), Math.round(e.getY()));
+                    if(vibration > 0){
+                        lastUpdate = System.currentTimeMillis();
+                        vibrator.vibrate(vibration);
                     }
                     break;
                 default:
