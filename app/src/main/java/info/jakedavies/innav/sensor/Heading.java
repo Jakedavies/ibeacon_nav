@@ -71,24 +71,25 @@ public class Heading implements SensorEventListener {
                     SensorManager.getOrientation(R, orientation);
                     float inRads = orientation[0];
                     int inDegs = (int)(Math.toDegrees(inRads) + 360) % 360;
-                    averageStack.push(inDegs);
-                    if (null != mCallback) {
-                        if(averageStack.size() >=stacksize){
-                            int result = 0;
-                            int total = 0;
-                            for (int i:
-                                 averageStack) {
-                                total+=i;
-                            }
-                            if(averageStack.size()> 0){
-                                if(averageStack.size() > stacksize){
-                                    averageStack.poll();
-                                }
-                                result = total/averageStack.size();
-                            }
-                            mCallback.headingChanged(result);
-                        }
-                    }
+                    mCallback.headingChanged(inDegs);
+//                    averageStack.push(inDegs);
+//                    if (null != mCallback) {
+//                        if(averageStack.size() >=stacksize){
+//                            int result = 0;
+//                            int total = 0;
+//                            for (int i:
+//                                 averageStack) {
+//                                total+=i;
+//                            }
+//                            if(averageStack.size()> 0){
+//                                if(averageStack.size() > stacksize){
+//                                    averageStack.poll();
+//                                }
+//                                result = total/averageStack.size();
+//                            }
+//                            mCallback.headingChanged(result);
+//                        }
+//                    }
                 }
             }
         }

@@ -30,6 +30,8 @@ public class Camera {
     public Camera(){
         initFloorplan();
     }
+
+    // Temp method to build a test map
     public void initFloorplan(){
         int blockWidth = 35;
         int blockWidth2 = 25;
@@ -49,14 +51,13 @@ public class Camera {
         }
         for(int i = 0; i< floorplan.length; i++){
             for(int j = 0; j < floorplan.length; j++){
-                if((i/blockWidth2) % 3 ==0 && (j/blockWidth2) % 3 ==0){
+                if(((i/blockWidth2)+blockWidth) % 3 ==0 && (j/blockWidth2) % 3 ==0){
                     floorplan[i][j].setIsle(true);
                 }
             }
         }
     }
     public void setPhoneRotation(int d){
-        Log.d("CAMERA", "Rotating");
         degrees = d;
     }
     public void setPhonePixels(int width, int height){
@@ -75,11 +76,9 @@ public class Camera {
             for(int y =0; y < phoneYU; y++){
                 Point p = getRotatedPoint(phoneLeft+x, phoneTop+y, degrees);
                 if(floorplan[p.x][p.y].isObstacle()){
-                    Log.d("BITWISE", "adding object 0");
                     out.add(new PaintedRect(new Rect(x*ppu, y*ppu, (x+1)*ppu,(y+1)*ppu), 0));
                 }
                 if(floorplan[p.x][p.y].isIsle()){
-                    Log.d("BITWISE", "adding object 1");
                     out.add(new PaintedRect(new Rect(x*ppu, y*ppu, (x+1)*ppu,(y+1)*ppu), 1));
                 }
             }
