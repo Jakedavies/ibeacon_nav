@@ -3,17 +3,11 @@
 
 ## Accomplishments
 
-### The map pivots and can move with the user 
-
-This was accomplished by creating a 2d array that represents the map, the array is an array of booleans, but could easily be an array of bytes or integers if different object types are needed. The map reads the devices current heading and applies the appropriate matrix transformations to display the map as it would appear in front of the user. The obstacles are displayed in black and when touches, provide haptic feedback to the user. 
-
-Further improvements may include more information for each block(a byte instead of boolean) and averaging of heading readings.
+### Todo
 
 ## Challenges
 
-### I think the map pivots on the top of the phone instead of the bottom
-
-This is an easy fix, we just need to shift the pivot point by the height of the phone, and invert the matrix transformations to pivot inverted. Currrently if you hold the phone upside down the mapping works as expected. 
+###   todo
 
 ## For next week
 
