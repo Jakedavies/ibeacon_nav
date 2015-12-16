@@ -27,8 +27,11 @@ public class MapByte {
         return bitVal(2);
     }
     //bit 3
-    public void setBit3(boolean value){
+    public void setPath(boolean value){
         setBit(3, value);
+    }
+    public boolean isPath(){
+        return bitVal(3);
     }
     //bit 4
     public void setBit4(boolean value){

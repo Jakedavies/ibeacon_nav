@@ -1,6 +1,7 @@
 package info.jakedavies.innav.lib;
 
 import android.graphics.Point;
+import android.util.Log;
 
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.NavigationGrid;
@@ -40,6 +41,7 @@ public class PathFinder {
     private void convertCells(){
         for(int i =0; i <  map.length; i++){
             for(int j = 0; j < map[i].length; j++){
+                Log.d("DEBUG", "adding cell" + i +" : " +  j);
                 cells[i][j] = new GridCell(i, j, map[i][j].isObstacle());
             }
         }
@@ -49,7 +51,7 @@ public class PathFinder {
     private void buildPath(){
         finder.findPath(current.x, current.y, destination.x, destination.y,navGrid);
     }
-    private List<GridCell> getPath(){
+    public List<GridCell> getPath(){
         return pathToEnd;
     };
 

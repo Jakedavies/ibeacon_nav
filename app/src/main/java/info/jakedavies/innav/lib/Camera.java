@@ -2,9 +2,12 @@ package info.jakedavies.innav.lib;
 
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
+
+import org.xguzm.pathfinding.grid.GridCell;
 
 import java.util.ArrayList;
 
@@ -25,6 +28,7 @@ public class Camera {
     private int phoneLeft;
     private int phoneRight;
     private int degrees;
+    private PathFinder pathFinder;
 
 
     public Camera(){
@@ -56,6 +60,7 @@ public class Camera {
                 }
             }
         }
+
     }
     public void setPhoneRotation(int d){
         degrees = d;
@@ -69,12 +74,22 @@ public class Camera {
         phoneLeft = phoneX-(phoneXU/2);
         phoneRight = phoneX+(phoneXU/2);
         phoneTop = phoneY+phoneYU;
+//        pathfinder no worky currently
+//        pathFinder = new PathFinder(floorplan, new Point(phoneXU, phoneYU), new Point((int)(floorplan.length*.75) , (int) (floorplan[0].length*.75)));
+//        for( GridCell gc : pathFinder.getPath()){
+//            int x = gc.getX();
+//            int y = gc.getY();
+//            floorplan[x][y].setPath(true);
+//        }
     }
     public ArrayList<PaintedRect> getCameraView(){
         ArrayList<PaintedRect> out = new ArrayList<>();
         for(int x =0; x < phoneXU; x++){
             for(int y =0; y < phoneYU; y++){
                 Point p = getRotatedPoint(phoneLeft+x, phoneTop+y, degrees);
+                if(floorplan[p.x][p.y].isPath()){
+                    out.add(new PaintedRect(new Rect(x*ppu, y*ppu, (x+1)*ppu,(y+1)*ppu), 3));
+                }
                 if(floorplan[p.x][p.y].isObstacle()){
                     out.add(new PaintedRect(new Rect(x*ppu, y*ppu, (x+1)*ppu,(y+1)*ppu), 0));
                 }

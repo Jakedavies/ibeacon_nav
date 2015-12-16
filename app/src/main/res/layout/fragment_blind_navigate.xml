@@ -42,7 +42,9 @@
                 android:layout_margin="1dp"
                 android:layout_height="fill_parent"
                 android:background="@color/primary"
-                android:gravity="center">
+                android:gravity="center"
+                android:clickable="true"
+                android:id="@+id/speakerButton">
                 <ImageView
                     android:layout_width="48dp"
                     android:contentDescription="@string/volume_icon"
