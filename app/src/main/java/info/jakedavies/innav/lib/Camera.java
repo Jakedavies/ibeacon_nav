@@ -12,12 +12,15 @@ import java.util.ArrayList;
  * Created by jakedavies on 15-11-17.
  */
 public class Camera {
+    // configurable by user
     private MapByte[][] floorplan = new MapByte[2001][2001];
     private int ppu = 10;
+    private int phoneY = 1000;
+    private int phoneX = 1000;
+
+
     private int pWidth;
     private int pHeight;
-    private int phoneX = 1000;
-    private int phoneY = 1000;
     private int phoneYU;
     private int phoneXU;
     private int phoneTop;

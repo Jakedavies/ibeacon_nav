@@ -8,4 +8,10 @@
     <string name="select_section">Select a section</string>
     <string name="volume_icon">Volume icon</string>
     <string name="vibration_icon">Vibration_icon</string>
+    <string name="calibrate_text">
+        Walk 50 meters and count the number of steps you make, then enter that number here.
+    </string>
+    <string name="step_calibrate_spinner_label">
+        Number of steps
+    </string>
 </resources>
