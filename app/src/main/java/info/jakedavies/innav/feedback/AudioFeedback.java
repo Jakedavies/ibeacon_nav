@@ -3,7 +3,9 @@ package info.jakedavies.innav.feedback;
 import android.content.Context;
 import android.media.AudioManager;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -15,7 +17,7 @@ public class AudioFeedback implements FeedbackInterface, TextToSpeech.OnInitList
     private TextToSpeech tts;
     private boolean ready = false;
 
-    AudioFeedback(Context context){
+    public AudioFeedback(Context context){
         tts = new TextToSpeech(context, this);
     }
 
@@ -33,7 +35,7 @@ public class AudioFeedback implements FeedbackInterface, TextToSpeech.OnInitList
     public void straight(int x) {
         speak("Move "+x+" meters forward");
     }
-    private void speak(String text){
+    private void speak(CharSequence text){
         // Speak only if the TTS is ready
         // and the user has allowed speech
 
@@ -41,7 +43,10 @@ public class AudioFeedback implements FeedbackInterface, TextToSpeech.OnInitList
             HashMap<String, String> hash = new HashMap<>();
             hash.put(TextToSpeech.Engine.KEY_PARAM_STREAM,
                     String.valueOf(AudioManager.STREAM_NOTIFICATION));
-            tts.speak(text, TextToSpeech.QUEUE_ADD, hash);
+            Date d = new Date();
+            tts.speak(text, TextToSpeech.QUEUE_ADD, null, d.toString());
+        } else {
+            Log.d("DEBUG", "speak not ready");
         }
     }
     public void destroy(){
