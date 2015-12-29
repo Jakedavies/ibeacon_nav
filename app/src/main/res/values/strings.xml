@@ -11,7 +11,6 @@
     <string name="calibrate_text">
         Walk 50 meters and count the number of steps you make, then enter that number here.
     </string>
-    <string name="step_calibrate_spinner_label">
-        Number of steps
-    </string>
+    <string name="step_calibrate_spinner_label">Number of steps</string>
+    <string name="step_finished">Save</string>
 </resources>

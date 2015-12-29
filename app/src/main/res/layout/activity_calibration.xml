@@ -19,19 +19,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="20dp">
         <TextView
             android:layout_height="match_parent"
             android:layout_width="0dip"
             android:layout_weight="0.5"
             android:text="@string/step_calibrate_spinner_label"
             android:textSize="20sp"
-            android:gravity="center"/>
-        <Spinner
+            android:gravity="bottom" />
+        <EditText
             android:layout_height="match_parent"
             android:layout_width="0dip"
-            android:id="@+id/spinner"
+            android:id="@+id/step_input"
             android:layout_weight="0.5" />
+
     </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/step_finished"
+        android:id="@+id/step_finished"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
