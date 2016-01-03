@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Vibrator;
 import android.view.MotionEvent;
@@ -29,13 +30,20 @@ public class Map extends View{
     Paint paint2;
     Context context;
     Vibrator vibrator;
-    Camera c = new Camera();
+    info.jakedavies.innav.lib.map.Map map;
+    Camera c;
     long lastUpdate;
     private long updateFrequency = 100;
     Paint[] paints = new Paint[4];
 
     public Map(Context context) {
         super(context);
+
+        // initialize the map
+        map = new info.jakedavies.innav.lib.map.Map();
+        map.buildFloorPlan();
+        c = new Camera(map);
+
         paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.FILL);
@@ -105,7 +113,8 @@ public class Map extends View{
         if(System.currentTimeMillis() - lastUpdate > updateFrequency){
             switch (e.getAction()) {
                 case MotionEvent.ACTION_MOVE:
-                    int vibration = c.blocked(Math.round(e.getX()), Math.round(e.getY()));
+                    Point p = c.getPointInMapCoords(Math.round(e.getX()), Math.round(e.getY()));
+                    int vibration = map.getVibrationForPoint(p);
                     if(vibration > 0){
                         lastUpdate = System.currentTimeMillis();
                         vibrator.vibrate(vibration);

@@ -2,25 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\pre-dexed\debug\classes-8cd929cca861c00ba3568983284b33176e40e2f2.jar" />
-    </item>
-    <item
         jar="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
         <dex dex="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-6ee2c13906fb7bf1bc3c2fb7ac91dc12398c2008.jar" />
-    </item>
-    <item
-        jar="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\exploded-aar\com.estimote\sdk\0.8.8\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="97a18e04ef0efe81ac85e8cce4121ba8e9971f23">
-        <dex dex="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\pre-dexed\debug\classes-bd7de8dfe52d4b4329332d7dadf8c9325aa1a575.jar" />
     </item>
     <item
         jar="C:\Users\jakedavies\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
@@ -30,11 +16,32 @@
         <dex dex="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-18aea1379725966791a06e2c4f0178aef212cbd5.jar" />
     </item>
     <item
+        jar="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\exploded-aar\com.estimote\sdk\0.8.8\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="97a18e04ef0efe81ac85e8cce4121ba8e9971f23">
+        <dex dex="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\pre-dexed\debug\classes-bd7de8dfe52d4b4329332d7dadf8c9325aa1a575.jar" />
+    </item>
+    <item
         jar="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
         <dex dex="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\pre-dexed\debug\classes-bdbeed0993152f77a057cdf3cac30a10a93eb753.jar" />
+    </item>
+    <item
+        jar="C:\Users\jakedavies\.gradle\caches\modules-2\files-2.1\com.github.xaguzman\pathfinding\0.2.6\fd0bed983bcf61a80e47efd1c5fd159595c24ad2\pathfinding-0.2.6.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fd0bed983bcf61a80e47efd1c5fd159595c24ad2">
+        <dex dex="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\pre-dexed\debug\pathfinding-0.2.6-175f54730e6c8217e0afc8777f9aae4e2f626cd5.jar" />
+    </item>
+    <item
+        jar="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\jakedavies\dev\iBeacon_nav\app\build\intermediates\pre-dexed\debug\classes-8cd929cca861c00ba3568983284b33176e40e2f2.jar" />
     </item>
 
 </items>
