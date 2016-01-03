@@ -20,6 +20,7 @@ import java.util.Stack;
 public class Heading implements SensorEventListener {
 
     private SensorManager mSensorManager;
+    private int numRangeSegments = 8;
 
     private long mLastUpdate;
 
@@ -71,25 +72,10 @@ public class Heading implements SensorEventListener {
                     SensorManager.getOrientation(R, orientation);
                     float inRads = orientation[0];
                     int inDegs = (int)(Math.toDegrees(inRads) + 360) % 360;
-                    mCallback.headingChanged(inDegs);
-//                    averageStack.push(inDegs);
-//                    if (null != mCallback) {
-//                        if(averageStack.size() >=stacksize){
-//                            int result = 0;
-//                            int total = 0;
-//                            for (int i:
-//                                 averageStack) {
-//                                total+=i;
-//                            }
-//                            if(averageStack.size()> 0){
-//                                if(averageStack.size() > stacksize){
-//                                    averageStack.poll();
-//                                }
-//                                result = total/averageStack.size();
-//                            }
-//                            mCallback.headingChanged(result);
-//                        }
-//                    }
+                    int segmentSizeInDegress = 360 / 8;
+                    int segmentNumber = inDegs / segmentSizeInDegress;
+                    int outDegs = (segmentNumber * segmentSizeInDegress);
+                    mCallback.headingChanged(outDegs);
                 }
             }
         }
