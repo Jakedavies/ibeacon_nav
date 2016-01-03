@@ -25,7 +25,7 @@ public class BaseActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.calibrate) {
             startActivity(new Intent(this, CalibrationActivity.class));
         }
         return super.onOptionsItemSelected(item);

@@ -1,0 +1,34 @@
+{
+  "features": [
+    {
+      "height": 90,
+      "type": "isle",
+      "width": 10,
+      "x": 10,
+      "y": 0
+    },
+    {
+      "height": 90,
+      "type": "isle",
+      "width": 10,
+      "x": 30,
+      "y": 0
+    },
+    {
+      "height": 90,
+      "type": "isle",
+      "width": 10,
+      "x": 50,
+      "y": 0
+    },
+    {
+      "height": 90,
+      "type": "isle",
+      "width": 10,
+      "x": 70,
+      "y": 0
+    }
+  ],
+  "height": 100,
+  "width": 100
+}

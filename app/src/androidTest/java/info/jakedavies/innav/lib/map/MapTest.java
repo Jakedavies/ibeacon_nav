@@ -11,7 +11,7 @@ public class MapTest extends TestCase {
     public void testGsonCreate() throws Exception {
         Map m = new Map();
         m.addFeature(new Feature());
-        m.addFeature(new Feature(10,10,"Dick"));
+        m.addFeature(new Feature(0,0,10,10,"Dick"));
         Gson g = new Gson();
         String json = g.toJson(m);
         System.out.println("Running");
@@ -21,7 +21,7 @@ public class MapTest extends TestCase {
     public void testGsonRead() throws  Exception {
         Map m = new Map();
         m.addFeature(new Feature());
-        m.addFeature(new Feature(10,10,"Dopne"));
+        m.addFeature(new Feature(0,0,10,10,"Dopne"));
         Gson g = new Gson();
         String json = g.toJson(m);
 

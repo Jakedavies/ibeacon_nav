@@ -44,6 +44,21 @@ public class MapByte {
             b &= ~(1 << bitNum);
         }
     }
+    public boolean setType(String type){
+        if(type.equals("obstacle")){
+            setObstacle(true);
+        }
+        else if (type.equals("isle")) {
+            setIsle(true);
+        }
+        else if(type.equals("wall")) {
+            setWall(true);
+        }
+        else {
+            return false;
+        }
+        return true;
+    }
     private boolean bitVal(int bitNum){
         return (b & (1L << bitNum)) != 0;
     }

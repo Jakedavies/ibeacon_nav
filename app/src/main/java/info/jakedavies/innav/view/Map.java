@@ -10,10 +10,15 @@ import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.Gson;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import info.jakedavies.innav.R;
 import info.jakedavies.innav.lib.Camera;
 import info.jakedavies.innav.lib.PaintedRect;
 
@@ -35,14 +40,17 @@ public class Map extends View{
     long lastUpdate;
     private long updateFrequency = 100;
     Paint[] paints = new Paint[4];
-
     public Map(Context context) {
         super(context);
 
         // initialize the map
-        map = new info.jakedavies.innav.lib.map.Map();
+        Gson g = new Gson();
+        String json = getMapConfig();
+        map = g.fromJson(json, info.jakedavies.innav.lib.map.Map.class);
+
         map.buildFloorPlan();
         c = new Camera(map);
+        c.setPhonePosition(map.getWidth() / 2, 0);
 
         paint = new Paint();
         paint.setColor(Color.BLACK);
@@ -53,13 +61,13 @@ public class Map extends View{
         paint2.setColor(Color.BLUE);
 
         paints[0] = new Paint();
-        paints[0].setColor(Color.GREEN);
-        paints[0].setAlpha(50);
+        paints[0].setColor(Color.BLACK);
+        paints[0].setAlpha(100);
         paints[0].setStyle(Paint.Style.FILL);
         paints[0].setStrokeWidth(5);
 
         paints[1] = new Paint();
-        paints[1].setColor(Color.BLACK);
+        paints[1].setColor(Color.GREEN);
         paints[1].setAlpha(50);
         paints[1].setStyle(Paint.Style.FILL);
         paints[1].setStrokeWidth(5);
@@ -83,6 +91,20 @@ public class Map extends View{
 
     private void init(){
 
+    }
+    private String getMapConfig() {
+        String json = null;
+        try {
+            InputStream is = this.getResources().openRawResource(R.raw.map);
+            byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return json;
     }
 
 

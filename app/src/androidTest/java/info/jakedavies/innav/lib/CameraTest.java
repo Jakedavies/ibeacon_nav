@@ -26,17 +26,5 @@ public class CameraTest extends TestCase {
     public void testGetCameraView() throws Exception {
 
     }
-    public void testGetRotatedPoint() throws Exception{
-        Camera c = new Camera();
 
-        Point p = c.getRotatedPoint(20, 10, 45);
-        Log.d("CameraTest", p.toString());
-        p = c.getRotatedPoint(30, 10, 45);
-        Log.d("CameraTest", p.toString());
-
-        p = c.getRotatedPoint(20, 10, 180);
-        Log.d("CameraTest", p.toString());
-        p = c.getRotatedPoint(30, 10, 180);
-        Log.d("CameraTest", p.toString());
-    }
 }

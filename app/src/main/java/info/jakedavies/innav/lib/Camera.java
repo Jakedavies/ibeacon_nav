@@ -3,6 +3,7 @@ package info.jakedavies.innav.lib;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -15,11 +16,11 @@ public class Camera {
 
     // all used for config
     Map map;
-    private int pixelsPerMeter = 100;
+    private int pixelsPerMeter = 10;
     private int pixelsWide;
     private int pixelsHigh;
-    private int phoneXPosition = 1000;
-    private int phoneYPosition = 1000;
+    private int phoneXPosition;
+    private int phoneYPosition;
     // automatically set under this
     private int phoneYU;
     private int phoneXU;
@@ -38,6 +39,13 @@ public class Camera {
     public void setPhoneRotation(int d){
         degrees = d;
     }
+    public void setPhonePosition(int x, int y){
+        phoneXPosition = x;
+        phoneYPosition = y;
+    }
+    public Point getPhonePosition(){
+        return new Point(phoneXPosition, phoneYPosition);
+    }
     public void setPhonePixels(int width, int height){
         pixelsWide = width;
         pixelsHigh = height;
@@ -54,8 +62,8 @@ public class Camera {
         // we should be able to change this method
         for(int x =0; x < phoneXU; x++){
             for(int y =0; y < phoneYU; y++){
-                Point p = getRotatedPoint(phoneLeft+x, phoneTop+y, degrees);
-                if(p.x >= map.getFloorPlan().length || p.x < 0 || p.y < 0 || p.y >= m.getFloorPlan()[0].length){
+                Point p = getRotatedPoint(phoneLeft+x, phoneBottom+y, degrees);
+                if(p.x >= map.getFloorPlan().length || p.x < 0 || p.y < 0 || p.y >= map.getFloorPlan()[0].length){
                     //probably should create a void type here, and use that instead of the current obstacle type we are using
                     out.add(new PaintedRect(new Rect(x* pixelsPerMeter, y* pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter), 0));
                 }

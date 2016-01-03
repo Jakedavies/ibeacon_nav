@@ -10,7 +10,7 @@ public class Feature {
     private int y = 0;
     private String type = "Isle";
 
-    public Feature(int width, int height,int x,int y, String type){
+    public Feature(int x,int y,int width, int height, String type){
         this.width = width;
         this.height = height;
         this.x = x;
@@ -19,6 +19,18 @@ public class Feature {
     }
     public String getType(){
         return type;
+    }
+    public int getWidth(){
+        return width;
+    }
+    public int getHeight(){
+        return height;
+    }
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
     }
     public Feature(){
     }

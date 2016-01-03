@@ -40,15 +40,18 @@ public class Map {
 
     public void buildFloorPlan(){
         floorplan = new MapByte[width][height];
+        for(int i = 0; i< floorplan.length; i++){
+            for(int j = 0; j < floorplan.length; j++){
+                floorplan[i][j] = new MapByte();
+            }
+        }
         for(Feature f : features){
             String type = f.getType();
-            if(type == "Isle"){
-                
+            for(int i =f.getX(); i < f.getX() + f.getWidth(); i++){
+                for(int j =f.getY(); j < f.getY() + f.getHeight(); j++){
+                    floorplan[i][j].setType(type);
+                }
             }
-            else if(type == "Obstacle"){
-
-            }
-
         }
     }
     public MapByte[][] getFloorPlan(){
