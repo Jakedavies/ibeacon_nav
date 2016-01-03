@@ -39,7 +39,17 @@ public class Map {
     }
 
     public void buildFloorPlan(){
+        floorplan = new MapByte[width][height];
+        for(Feature f : features){
+            String type = f.getType();
+            if(type == "Isle"){
+                
+            }
+            else if(type == "Obstacle"){
 
+            }
+
+        }
     }
     public MapByte[][] getFloorPlan(){
         return floorplan;
