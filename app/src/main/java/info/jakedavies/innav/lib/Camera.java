@@ -23,6 +23,7 @@ public class Camera {
     private int phoneYPosition;
     // automatically set under this
     private int phoneYU;
+    private int zoom = 1;
     private int phoneXU;
     private int phoneTop;
     private int phoneBottom;
@@ -43,18 +44,26 @@ public class Camera {
         phoneXPosition = x;
         phoneYPosition = y;
     }
+    public void setZoom(int zoom){
+        this.zoom = zoom;
+        calculateDims();
+    }
     public Point getPhonePosition(){
         return new Point(phoneXPosition, phoneYPosition);
     }
     public void setPhonePixels(int width, int height){
         pixelsWide = width;
         pixelsHigh = height;
-        phoneXU = pixelsWide / pixelsPerMeter;
-        phoneYU = pixelsHigh / pixelsPerMeter;
-        phoneBottom = phoneYPosition;
-        phoneLeft = phoneXPosition -(phoneXU/2);
-        phoneRight = phoneXPosition +(phoneXU/2);
-        phoneTop = phoneYPosition +phoneYU;
+        calculateDims();
+    }
+    private void calculateDims(){
+        // TODO: Fix Zoom
+        phoneXU = pixelsWide / (zoom * pixelsPerMeter);
+        phoneYU = pixelsHigh / (zoom * pixelsPerMeter);
+        phoneBottom = (phoneYPosition/zoom);
+        phoneLeft = (phoneXPosition/zoom) -(phoneXU/2);
+        phoneRight = (phoneXPosition/zoom) +(phoneXU/2);
+        phoneTop = (phoneYPosition/zoom) - phoneYU;
     }
 
     public ArrayList<PaintedRect> getCameraView(){
@@ -62,20 +71,21 @@ public class Camera {
         // we should be able to change this method
         for(int x =0; x < phoneXU; x++){
             for(int y =0; y < phoneYU; y++){
-                Point p = getRotatedPoint(phoneLeft+x, phoneBottom+y, degrees);
+                Point p = getRotatedPoint(phoneLeft+x, phoneBottom+y - phoneYU, degrees);
+                Rect r = new Rect(x* pixelsPerMeter, y * pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter);
                 if(p.x >= map.getFloorPlan().length || p.x < 0 || p.y < 0 || p.y >= map.getFloorPlan()[0].length){
                     //probably should create a void type here, and use that instead of the current obstacle type we are using
-                    out.add(new PaintedRect(new Rect(x* pixelsPerMeter, y* pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter), 0));
+                    out.add(new PaintedRect(r, 0));
                 }
                 else {
                     if(map.getFloorPlan()[p.x][p.y].isPath()){
-                        out.add(new PaintedRect(new Rect(x* pixelsPerMeter, y* pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter), 3));
+                        out.add(new PaintedRect(r, 3));
                     }
                     if(map.getFloorPlan()[p.x][p.y].isObstacle()){
-                        out.add(new PaintedRect(new Rect(x* pixelsPerMeter, y* pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter), 0));
+                        out.add(new PaintedRect(r, 0));
                     }
                     if(map.getFloorPlan()[p.x][p.y].isIsle()){
-                        out.add(new PaintedRect(new Rect(x* pixelsPerMeter, y* pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter), 1));
+                        out.add(new PaintedRect(r, 1));
                     }
                 }
 

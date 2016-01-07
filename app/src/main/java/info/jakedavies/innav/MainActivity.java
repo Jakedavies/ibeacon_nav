@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import info.jakedavies.innav.fragment.BlindNavigationFragment;
 import info.jakedavies.innav.fragment.LocationSelectFragment;
 
 
@@ -25,7 +26,7 @@ public class MainActivity extends BaseActivity {
             }
 
             // Create a new Fragment to be placed in the activity layout
-            LocationSelectFragment mainFragment = new LocationSelectFragment();
+            BlindNavigationFragment mainFragment = new BlindNavigationFragment();
 
             // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()
