@@ -34,9 +34,10 @@ public class MapByte {
         return bitVal(3);
     }
     //bit 4
-    public void setBit4(boolean value){
+    public void setIntersection(boolean value){
         setBit(4, value);
     }
+    public boolean isIntersection() { return bitVal(4); }
     private void setBit(int bitNum, boolean value){
         if(value){
             b |= 1 << bitNum;

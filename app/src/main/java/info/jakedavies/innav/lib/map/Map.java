@@ -20,12 +20,19 @@ public class Map {
     }
 
     private List<Feature> features = new ArrayList<Feature>();
+    private List<Intersection> intersections = new ArrayList<Intersection>();
 
     public List<Feature> getFeatures(){
         return features;
     }
+    public List<Intersection> getIntersection(){
+        return intersections;
+    }
     public void addFeature(Feature f){
         features.add(f);
+    }
+    public void addIntersection(Intersection i){
+        intersections.add(i);
     }
     public int getHeight(){
         return height;
@@ -52,6 +59,9 @@ public class Map {
                     floorplan[i][j].setType(type);
                 }
             }
+        }
+        for(Intersection intersection : intersections){
+            floorplan[intersection.getX()][intersection.getY()].setIntersection(true);
         }
     }
     public MapByte[][] getFloorPlan(){

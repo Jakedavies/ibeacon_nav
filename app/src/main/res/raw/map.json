@@ -29,6 +29,38 @@
       "y": 0
     }
   ],
+  "intersections": [
+    {
+      "canBeGoal": false,
+      "x": 25,
+      "y": 95
+    },
+    {
+      "canBeGoal": false,
+      "x": 45,
+      "y": 95
+    },
+    {
+      "canBeGoal": false,
+      "x": 65,
+      "y": 95
+    },
+    {
+      "canBeGoal": false,
+      "x": 25,
+      "y": 20
+    },
+    {
+      "canBeGoal": false,
+      "x": 45,
+      "y": 20
+    },
+    {
+      "canBeGoal": false,
+      "x": 65,
+      "y": 20
+    }
+  ],
   "height": 100,
   "width": 100
 }

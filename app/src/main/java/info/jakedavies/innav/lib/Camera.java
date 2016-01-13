@@ -77,7 +77,11 @@ public class Camera {
                     if(map.getFloorPlan()[p.x][p.y].isIsle()){
                         out.add(new PaintedRect(new Rect(x* pixelsPerMeter, y* pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter), 1));
                     }
+                    if(map.getFloorPlan()[p.x][p.y].isIntersection()){
+                        out.add(new PaintedRect(new Rect(x* pixelsPerMeter, y* pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter), 4));
+                    }
                 }
+
 
             }
         }

@@ -9,50 +9,43 @@ import org.xguzm.pathfinding.grid.finders.AStarGridFinder;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import info.jakedavies.innav.lib.map.Intersection;
 
 /**
  * Created by jakedavies on 2015-12-13.
  */
 public class PathFinder {
-    private ArrayList<Point> path;
-    private GridCell[][] cells;
-    private MapByte[][] map;
-    AStarGridFinder<GridCell> finder;
-
-    private Point current;
-    private Point destination;
-    private List<GridCell> pathToEnd;
-    private NavigationGrid<GridCell> navGrid;
-
-
-    public PathFinder(MapByte[][] map, Point current, Point destination){
-        // init map components
-        this.map = map;
-        this.path = new ArrayList<Point>();
-        this.cells = new GridCell[map.length][map[0].length];
-        this.current = current;
-        this.destination = destination;
-        this.finder = new AStarGridFinder(GridCell.class);
-        convertCells();
-        buildPath();
+    private ArrayList<Intersection> intersections;
+    private HashMap<String, Intersection> intersectionHash = new HashMap<>();
+    private ArrayList<Integer> xPoints;
+    private ArrayList<Integer> yPoints;
+    public PathFinder(ArrayList<Intersection> intersections){
+        this.intersections = intersections;
     }
-
-    private void convertCells(){
-        for(int i =0; i <  map.length; i++){
-            for(int j = 0; j < map[i].length; j++){
-                Log.d("DEBUG", "adding cell" + i +" : " +  j);
-                cells[i][j] = new GridCell(i, j, map[i][j].isObstacle());
+    public void reduce(){
+        Intersection[][] pointToIntersectionMapping = new int[][yPoints.size()];
+        for(Intersection i : intersections) {
+            if(!xPoints.contains(i.getX())){
+                xPoints.add(i.getX());
+            }
+            if(!yPoints.contains(i.getY())){
+                yPoints.add(i.getY());
+            }
+            intersectionHash.put(hash(i.getX(), i.getY()), i);
+        }
+        GridCell[][] reducedPointGrid = new GridCell[xPoints.size()][yPoints.size()];
+        for(int i = 0; i < reducedPointGrid.length; i++){
+            for(int j = 0; i < reducedPointGrid[i].length; j++){
+                reducedPointGrid[i][j] = new GridCell();
+                reducedPointGrid[i][j].setWalkable(intersectionHash.containsKey(hash(i,j)));
             }
         }
-        navGrid = new NavigationGrid(cells);
     }
-
-    private void buildPath(){
-        finder.findPath(current.x, current.y, destination.x, destination.y,navGrid);
+    private String hash(int x, int y){
+        return "" + x +"" + y;
     }
-    public List<GridCell> getPath(){
-        return pathToEnd;
-    };
 
 }
