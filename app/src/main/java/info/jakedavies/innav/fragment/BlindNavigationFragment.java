@@ -26,6 +26,7 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     private TextView degree;
     private AudioFeedback af;
     private LinearLayout speakerButton;
+    private LinearLayout vibrateButton;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -53,6 +54,14 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
             }
         });
 
+        vibrateButton = (LinearLayout) v.findViewById(R.id.vibrateButton);
+        vibrateButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                onVibrateClick(v);
+            }
+        });
+
         // by programmatically adding the view we can maintain a pointer to the view and modify data
         mapLayout.addView(mapView);
         return v;
@@ -75,19 +84,10 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         mapView.translateToPosition(heading);
     }
     public void onSpeakerClick(View v) {
-        Log.d("DEBUG", "speaker clicked");
-        Random rn = new Random();
-        int selection = rn.nextInt(3);
-        if(selection == 0){
-            af.turnLeft();
-        } else if(selection == 1){
-            af.turnRight();
-        } else {
-            Random rn2 = new Random();
-            int d2 = rn2.nextInt(20);
-            af.straight(d2);
-        }
-
+        mapView.setZoom();
+    }
+    public void onVibrateClick(View v) {
+        mapView.toggleNorthLock();
     }
 
     // heading sensor update event should push event to mapview to modify view

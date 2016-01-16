@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Vibrator;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 
 import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.Gson;
@@ -29,6 +30,7 @@ import info.jakedavies.innav.lib.PaintedRect;
 public class Map extends View{
 
     int width;
+    private boolean lockNorth = false;
     int height;
     List<Rect> obstacles = new ArrayList<>();
     Paint paint;
@@ -50,7 +52,7 @@ public class Map extends View{
 
         map.buildFloorPlan();
         c = new Camera(map);
-        c.setPhonePosition(map.getWidth() / 2, 0);
+        c.setPhonePosition(map.getWidth() / 2, map.getHeight());
 
         paint = new Paint();
         paint.setColor(Color.BLACK);
@@ -91,11 +93,10 @@ public class Map extends View{
 
         lastUpdate = System.currentTimeMillis();
         vibrator = (Vibrator) context.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-        init();
+        init(context);
     }
 
-    private void init(){
-
+    private void init(Context context){
     }
     private String getMapConfig() {
         String json = null;
@@ -136,7 +137,6 @@ public class Map extends View{
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        //based on where this touch event was, we can give correct vibrational feedback to the user using our feedback classes
         if(System.currentTimeMillis() - lastUpdate > updateFrequency){
             switch (e.getAction()) {
                 case MotionEvent.ACTION_MOVE:
@@ -155,9 +155,23 @@ public class Map extends View{
         return true;
     }
     public boolean translateToPosition(int degrees){
+        if(lockNorth){
+            degrees = 0;
+        }
         c.setPhoneRotation(degrees);
         this.invalidate();
         return true;
+    }
+    public void toggleNorthLock(){
+        lockNorth = !lockNorth;
+    }
+    private int currentZoom = 1;
+    public void setZoom(){
+        currentZoom++;
+        if(currentZoom > 3){
+            currentZoom = 1;
+        }
+        c.setZoom(currentZoom);
     }
     private boolean collidesWithObstacle(float x, float y){
         for(Rect obstacle : obstacles){
