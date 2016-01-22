@@ -1,11 +1,16 @@
 package info.jakedavies.innav.lib.map;
 
 import android.graphics.Point;
+import android.graphics.Rect;
+
+import org.xguzm.pathfinding.grid.GridCell;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import info.jakedavies.innav.lib.MapByte;
+import info.jakedavies.innav.lib.PathFinder;
 import info.jakedavies.innav.lib.floorplan.Floorplan;
 
 /**
@@ -20,7 +25,7 @@ public class Map {
     }
 
     private List<Feature> features = new ArrayList<Feature>();
-    private List<Intersection> intersections = new ArrayList<Intersection>();
+    private ArrayList<Intersection> intersections = new ArrayList<Intersection>();
 
     public List<Feature> getFeatures(){
         return features;
@@ -62,6 +67,15 @@ public class Map {
         }
         for(Intersection intersection : intersections){
             floorplan[intersection.getX()][intersection.getY()].setIntersection(true);
+        }
+        PathFinder p = new PathFinder(intersections);
+        ArrayList<Rect> path = p.reduce();
+        for (Rect r : path) {
+            for(int i = r.left; i <= r.right; i++){
+                for(int j =r.top; j <= r.bottom; j++){
+                    floorplan[i][j].setPath(true);
+                }
+            }
         }
     }
     public MapByte[][] getFloorPlan(){
