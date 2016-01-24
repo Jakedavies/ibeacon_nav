@@ -45,6 +45,9 @@ public class MapByte {
             b &= ~(1 << bitNum);
         }
     }
+    public boolean isWalkable(){
+        return !isIsle() && !isObstacle();
+    }
     public boolean setType(String type){
         if(type.equals("obstacle")){
             setObstacle(true);

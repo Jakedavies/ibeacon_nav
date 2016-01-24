@@ -68,7 +68,7 @@ public class Map {
         for(Intersection intersection : intersections){
             floorplan[intersection.getX()][intersection.getY()].setIntersection(true);
         }
-        PathFinder p = new PathFinder(intersections);
+        PathFinder p = new PathFinder(intersections, floorplan);
         ArrayList<Rect> path = p.reduce();
         for (Rect r : path) {
             for(int i = r.left; i <= r.right; i++){
