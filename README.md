@@ -97,6 +97,6 @@ Presentation | April 14th, 2016 | N/A
 * Week 1: Positioning with ibeacons
 * Week 2: Realistic map of real store
 * Week 3: routing to user selected area, show notifications near IBeacons, improving direction estimates using ibeacon with heading sensor
-* Week 4: Blind
+* Week 4: Blind, ui improvements
 * Week 5: Sensor fusion
 
