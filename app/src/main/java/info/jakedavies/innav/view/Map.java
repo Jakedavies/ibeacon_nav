@@ -91,6 +91,11 @@ public class Map extends View{
         paints[4].setStyle(Paint.Style.FILL);
         paints[4].setStrokeWidth(5);
 
+        paints[5] = new Paint();
+        paints[5].setColor(Color.RED);
+        paints[5].setStyle(Paint.Style.FILL);
+        paints[5].setStrokeWidth(5);
+
         lastUpdate = System.currentTimeMillis();
         vibrator = (Vibrator) context.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
         init(context);

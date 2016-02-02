@@ -38,6 +38,13 @@ public class MapByte {
         setBit(4, value);
     }
     public boolean isIntersection() { return bitVal(4); }
+    //bit 5
+    public void setBeacon(boolean value){
+        setBit(5, value);
+    }
+    public boolean isBeacon() { return bitVal(5); }
+
+    // helper methods
     private void setBit(int bitNum, boolean value){
         if(value){
             b |= 1 << bitNum;

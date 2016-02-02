@@ -90,6 +90,9 @@ public class Camera {
                     if(map.getFloorPlan()[p.x][p.y].isIntersection()){
                         out.add(new PaintedRect(new Rect(x* pixelsPerMeter, y* pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter), 4));
                     }
+                    if(map.getFloorPlan()[p.x][p.y].isBeacon()){
+                        out.add(new PaintedRect(new Rect(x* pixelsPerMeter, y* pixelsPerMeter, (x+1)* pixelsPerMeter,(y+1)* pixelsPerMeter), 5));
+                    }
                 }
 
 

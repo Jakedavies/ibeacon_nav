@@ -26,12 +26,16 @@ public class Map {
 
     private List<Feature> features = new ArrayList<Feature>();
     private ArrayList<Intersection> intersections = new ArrayList<Intersection>();
+    private ArrayList<Beacon> beacons = new ArrayList<Beacon>();
 
     public List<Feature> getFeatures(){
         return features;
     }
     public List<Intersection> getIntersection(){
         return intersections;
+    }
+    public List<Beacon> getBeacons() {
+        return beacons;
     }
     public void addFeature(Feature f){
         features.add(f);
@@ -67,6 +71,9 @@ public class Map {
         }
         for(Intersection intersection : intersections){
             floorplan[intersection.getX()][intersection.getY()].setIntersection(true);
+        }
+        for(Beacon b : beacons){
+            floorplan[b.getX()][b.getY()].setIntersection(true);
         }
         PathFinder p = new PathFinder(intersections, floorplan);
         ArrayList<Rect> path = p.reduce();
