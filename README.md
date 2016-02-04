@@ -54,6 +54,7 @@
 7. Pinpoint navigation of sections in a store (Lakeview market test)
 8. Server/client communication between mobile device and server for configuration data and additional tracking information
 9. Interpret location configuration files from server on device
+10. Scroll map with finger
 
 
 ## Timeline
