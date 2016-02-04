@@ -21,6 +21,7 @@ import java.util.regex.Matcher;
 
 import info.jakedavies.innav.R;
 import info.jakedavies.innav.lib.Camera;
+import info.jakedavies.innav.lib.MapByte;
 import info.jakedavies.innav.lib.PaintedRect;
 
 
@@ -41,7 +42,7 @@ public class Map extends View{
     Camera c;
     long lastUpdate;
     private long updateFrequency = 100;
-    Paint[] paints = new Paint[5];
+    Paint[] paints = new Paint[6];
     public Map(Context context) {
         super(context);
 
@@ -185,5 +186,8 @@ public class Map extends View{
             }
         }
         return false;
+    }
+    public info.jakedavies.innav.lib.map.Map getMap(){
+        return map;
     }
 }
