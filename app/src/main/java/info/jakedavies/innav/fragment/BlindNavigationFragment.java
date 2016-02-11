@@ -25,7 +25,6 @@ import info.jakedavies.innav.R;
 import info.jakedavies.innav.feedback.AudioFeedback;
 import info.jakedavies.innav.lib.floorplan.Floorplan;
 import info.jakedavies.innav.lib.map.Intersection;
-import info.jakedavies.innav.lib.map.Section;
 import info.jakedavies.innav.sensor.Heading;
 import info.jakedavies.innav.view.Map;
 
