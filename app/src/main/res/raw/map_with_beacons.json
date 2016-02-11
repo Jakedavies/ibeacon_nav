@@ -16,6 +16,8 @@
       "uuid": "3"
     }
   ],
+
+  "name": "Box with beacons",
   "height": 10,
   "width": 10
 }

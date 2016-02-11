@@ -11,6 +11,12 @@ import android.widget.ListView;
 import android.widget.AdapterView;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
+import info.jakedavies.innav.adapter.Location;
 import info.jakedavies.innav.adapter.LocationListAdapter;
 import info.jakedavies.innav.R;
 
@@ -20,14 +26,10 @@ import info.jakedavies.innav.R;
 public class LocationSelectFragment extends Fragment {
 
 
-    final static String[] locations = {
-            "University Of British Columbia",
-            "Lakeview Market"
-    };
+    Location[] locations = {new Location(1,"location1"), new Location(2,"location2")};
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
     }
 
 
@@ -37,7 +39,7 @@ public class LocationSelectFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_select_location, container, false);
         final ListView locationListView = (ListView) v.findViewById(R.id.locations);
-        ArrayAdapter<String> locationViewAdapter = new LocationListAdapter(this.getContext(), R.layout.location_item, locations);
+        ArrayAdapter<Location> locationViewAdapter = new LocationListAdapter(this.getContext(), R.layout.location_item, locations);
         locationListView.setAdapter(locationViewAdapter);
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -45,13 +47,13 @@ public class LocationSelectFragment extends Fragment {
 
 
                 // set Fragmentclass Arguments
-                String locationName = (String)locationListView.getItemAtPosition(position);
+                Location location = (Location) locationListView.getItemAtPosition(position);
 
 
                 Bundle bundle = new Bundle();
-                bundle.putString("location_name",locationName);
+                bundle.putInt("location",location.getId());
                 // Create fragment and give it an argument specifying the article it should show
-                SectionSelectFragment newFragment = new SectionSelectFragment();
+                BlindNavigationFragment newFragment = new BlindNavigationFragment();
                 newFragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -66,6 +68,28 @@ public class LocationSelectFragment extends Fragment {
         });
         return v;
     }
+
+    private String getMapConfig(int resourceId) {
+        String json = null;
+        try {
+            InputStream is = this.getResources().openRawResource(resourceId);
+            byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return json;
+    }
+//    private void listRaw(){
+//        Field[] fields=R.raw.class.getFields();
+//        for(int count=0; count < fields.length; count++){
+//            int resourceID = fields[count].getInt(fields[count]);
+//            String resourceName = fields[count].getName();
+//        }
+//    }
 
 
     @Override

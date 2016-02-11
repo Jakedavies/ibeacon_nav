@@ -2,20 +2,30 @@ package info.jakedavies.innav.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 
 import info.jakedavies.innav.R;
 import info.jakedavies.innav.feedback.AudioFeedback;
 import info.jakedavies.innav.lib.floorplan.Floorplan;
+import info.jakedavies.innav.lib.map.Intersection;
+import info.jakedavies.innav.lib.map.Section;
 import info.jakedavies.innav.sensor.Heading;
 import info.jakedavies.innav.view.Map;
 
@@ -26,10 +36,15 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     private TextView degree;
     private AudioFeedback af;
     private LinearLayout speakerButton;
+    private int mapID;
     private LinearLayout vibrateButton;
+    private Button section_button;
+    private info.jakedavies.innav.lib.map.Map map;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+
         mSensor = new Heading(getActivity().getApplication().getApplicationContext(), this);
         af = new AudioFeedback(getActivity().getApplication().getApplicationContext());
     }
@@ -41,7 +56,12 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         View v = inflater.inflate(R.layout.fragment_blind_navigate, container, false);
         LinearLayout mapLayout = (LinearLayout) v.findViewById(R.id.map);
 
-        mapView = new Map(getContext());
+        mapID = getArguments().getInt("location");
+        // initialize the map
+        Gson g = new Gson();
+        String json = getMapConfig(mapID);
+        map  = g.fromJson(json, info.jakedavies.innav.lib.map.Map.class)
+        mapView = new Map(getContext(), map);
         mapView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT));
@@ -59,6 +79,14 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
             @Override
             public void onClick(View v){
                 onVibrateClick(v);
+            }
+        });
+
+        section_button = (Button) v.findViewById(R.id.section_button);
+        section_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                onSectionClick();
             }
         });
 
@@ -83,13 +111,47 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         degree.setText(String.valueOf(heading));
         mapView.translateToPosition(heading);
     }
-    public void onSpeakerClick(View v) {
+    private void onSpeakerClick(View v) {
         mapView.setZoom();
     }
-    public void onVibrateClick(View v) {
+    private void onVibrateClick(View v) {
         mapView.toggleNorthLock();
     }
+    private void onSectionClick(){
+        //Creating the instance of PopupMenu
+        PopupMenu popup = new PopupMenu(getActivity().getApplication().getApplicationContext(), section_button);
+        //Inflating the Popup using xml file
+        popup.getMenuInflater().inflate(R.menu.section_menu, popup.getMenu());
+        for(Intersection s : map.getSections()){
+            if(s.canBeGoal()){
+                popup.getMenu().add(s.getName());
+            }
+        }
+        //registering popup with OnMenuItemClickListener
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                //TODO: do something here, like change navigation goal?
+                return false;
+            }
+        });
 
+        popup.show();//showing popup menu
+    }
+    private String getMapConfig(int id) {
+        String json = null;
+        try {
+            InputStream is = this.getResources().openRawResource(id);
+            byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return json;
+    }
     // heading sensor update event should push event to mapview to modify view
 
 }

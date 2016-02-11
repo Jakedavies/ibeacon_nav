@@ -8,15 +8,21 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import info.jakedavies.innav.R;
 
 /**
  * Created by jakedavies on 15-10-05.
  */
-public class LocationListAdapter extends ArrayAdapter<String> {
+public class LocationListAdapter extends ArrayAdapter<Location> {
 
-    private String[] locations;
-    public LocationListAdapter(Context context,int resource, String[] locations) {
+    private Location[] locations;
+
+    public LocationListAdapter(Context context,int resource, Location[] locations) {
         super(context, resource, locations);
         this.locations = locations;
     }
@@ -26,7 +32,7 @@ public class LocationListAdapter extends ArrayAdapter<String> {
             v = inflater.inflate(R.layout.location_item, null);
         }
         
-        String name = locations[position];
+        String name = locations[position].getName();
         TextView lname = (TextView) v.findViewById(R.id.location_name);
         lname.setText(name);
 

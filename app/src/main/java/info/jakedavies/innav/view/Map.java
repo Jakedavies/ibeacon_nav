@@ -42,15 +42,12 @@ public class Map extends View{
     long lastUpdate;
     private long updateFrequency = 100;
     Paint[] paints = new Paint[5];
-    public Map(Context context) {
+    public Map(Context context, info.jakedavies.innav.lib.map.Map map) {
         super(context);
 
-        // initialize the map
-        Gson g = new Gson();
-        String json = getMapConfig();
-        map = g.fromJson(json, info.jakedavies.innav.lib.map.Map.class);
+        this.map = map;
 
-        map.buildFloorPlan();
+        this.map.buildFloorPlan();
         c = new Camera(map);
         c.setPhonePosition(map.getWidth() / 2, map.getHeight());
 
@@ -103,20 +100,7 @@ public class Map extends View{
 
     private void init(Context context){
     }
-    private String getMapConfig() {
-        String json = null;
-        try {
-            InputStream is = this.getResources().openRawResource(R.raw.map);
-            byte[] buffer = new byte[is.available()];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        return json;
-    }
+
 
 
     @Override

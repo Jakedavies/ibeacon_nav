@@ -5,7 +5,9 @@ import android.graphics.Rect;
 
 import org.xguzm.pathfinding.grid.GridCell;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -27,7 +29,6 @@ public class Map {
     private List<Feature> features = new ArrayList<Feature>();
     private ArrayList<Intersection> intersections = new ArrayList<Intersection>();
     private ArrayList<Beacon> beacons = new ArrayList<Beacon>();
-
     public List<Feature> getFeatures(){
         return features;
     }
@@ -36,6 +37,13 @@ public class Map {
     }
     public List<Beacon> getBeacons() {
         return beacons;
+    }
+    public List<Intersection> getSections() {
+        ArrayList<Intersection> sections = new ArrayList<>();
+        for(Intersection i : intersections){
+            sections.add(i);
+        }
+        return sections;
     }
     public void addFeature(Feature f){
         features.add(f);

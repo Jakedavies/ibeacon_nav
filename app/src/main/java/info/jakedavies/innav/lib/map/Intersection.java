@@ -7,6 +7,7 @@ public class Intersection {
     private int x = 0;
     private int y = 0;
     private boolean canBeGoal = false;
+    private String name = null;
     public Intersection(int x,int y,boolean canBeGoal){
         this.x = x;
         this.y = y;
@@ -15,6 +16,7 @@ public class Intersection {
     public boolean canBeGoal() {
         return canBeGoal;
     }
+    public String getName() { return name; };
     public int getX(){
         return x;
     }
