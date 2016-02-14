@@ -62,6 +62,23 @@ public class Map {
         return 50;
     }
 
+    public int start_x, start_y, goal_x = -1, goal_y = -1;
+
+    public void setGoal(String goalName){
+        for (Intersection i:
+             intersections) {
+            if(i.canBeGoal() && i.getName().equals(goalName)){
+                goal_x = i.getX();
+                goal_y = i.getY();
+                break;
+            }
+        }
+    }
+    public void setStart(int x, int y){
+        start_x = x;
+        start_y = y;
+    }
+
     public void buildFloorPlan(){
         floorplan = new MapByte[width][height];
         for(int i = 0; i< floorplan.length; i++){
@@ -83,15 +100,19 @@ public class Map {
         for(Beacon b : beacons){
             floorplan[b.getX()][b.getY()].setIntersection(true);
         }
-        PathFinder p = new PathFinder(intersections, floorplan);
-        ArrayList<Rect> path = p.reduce();
-        for (Rect r : path) {
-            for(int i = r.left; i <= r.right; i++){
-                for(int j =r.top; j <= r.bottom; j++){
-                    floorplan[i][j].setPath(true);
+        // if goal is set, we calculate path
+        if(goal_x > -1 && goal_y > -1){
+            PathFinder p = new PathFinder(intersections, floorplan);
+            ArrayList<Rect> path = p.reduce(goal_x, goal_y);
+            for (Rect r : path) {
+                for(int i = r.left; i <= r.right; i++){
+                    for(int j =r.top; j <= r.bottom; j++){
+                        floorplan[i][j].setPath(true);
+                    }
                 }
             }
         }
+
     }
     public MapByte[][] getFloorPlan(){
         return floorplan;

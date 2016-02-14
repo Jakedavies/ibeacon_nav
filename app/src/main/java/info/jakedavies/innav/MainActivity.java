@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity {
             }
 
             // Create a new Fragment to be placed in the activity layout
-            BlindNavigationFragment mainFragment = new BlindNavigationFragment();
+            LocationSelectFragment mainFragment = new LocationSelectFragment();
 
             // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()

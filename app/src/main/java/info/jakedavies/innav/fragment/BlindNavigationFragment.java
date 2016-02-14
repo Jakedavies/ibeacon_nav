@@ -2,8 +2,8 @@ package info.jakedavies.innav.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,20 +32,13 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
 
     private Map mapView;
     private Heading  mSensor;
-    private TextView degree;
-    private AudioFeedback af;
-    private LinearLayout speakerButton;
     private int mapID;
-    private LinearLayout vibrateButton;
     private Button section_button;
     private info.jakedavies.innav.lib.map.Map map;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
-
         mSensor = new Heading(getActivity().getApplication().getApplicationContext(), this);
-        af = new AudioFeedback(getActivity().getApplication().getApplicationContext());
     }
 
     @Override
@@ -59,27 +52,11 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         // initialize the map
         Gson g = new Gson();
         String json = getMapConfig(mapID);
-        map  = g.fromJson(json, info.jakedavies.innav.lib.map.Map.class)
+        map  = g.fromJson(json, info.jakedavies.innav.lib.map.Map.class);
         mapView = new Map(getContext(), map);
         mapView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT));
-        degree = (TextView) v.findViewById(R.id.degree);
-        speakerButton = (LinearLayout) v.findViewById(R.id.speakerButton);
-        speakerButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                onSpeakerClick(v);
-            }
-        });
-
-        vibrateButton = (LinearLayout) v.findViewById(R.id.vibrateButton);
-        vibrateButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                onVibrateClick(v);
-            }
-        });
 
         section_button = (Button) v.findViewById(R.id.section_button);
         section_button.setOnClickListener(new View.OnClickListener() {
@@ -107,8 +84,7 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
 
     @Override
     public void headingChanged(int heading) {
-        degree.setText(String.valueOf(heading));
-        mapView.translateToPosition(heading);
+        //mapView.translateToPosition(heading);
     }
     private void onSpeakerClick(View v) {
         mapView.setZoom();
@@ -131,6 +107,8 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 //TODO: do something here, like change navigation goal?
+                mapView.setGoal(item.getTitle().toString());
+                mapView.invalidate();
                 return false;
             }
         });

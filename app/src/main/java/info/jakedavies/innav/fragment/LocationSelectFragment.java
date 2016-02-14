@@ -3,6 +3,7 @@ package info.jakedavies.innav.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class LocationSelectFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_select_location, container, false);
         final ListView locationListView = (ListView) v.findViewById(R.id.locations);
-        ArrayAdapter<Location> locationViewAdapter = new LocationListAdapter(this.getContext(), R.layout.location_item, locations);
+        ArrayAdapter<Location> locationViewAdapter = new LocationListAdapter(this.getContext(), R.layout.location_item, readLocations());
         locationListView.setAdapter(locationViewAdapter);
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,13 +84,22 @@ public class LocationSelectFragment extends Fragment {
         }
         return json;
     }
-//    private void listRaw(){
-//        Field[] fields=R.raw.class.getFields();
-//        for(int count=0; count < fields.length; count++){
-//            int resourceID = fields[count].getInt(fields[count]);
-//            String resourceName = fields[count].getName();
-//        }
-//    }
+    private Location[] readLocations(){
+        Field[] fields=R.raw.class.getFields();
+        Location[] locations = new Location[fields.length];
+        for(int count=0; count < fields.length; count++){
+            try {
+                int resourceID = fields[count].getInt(fields[count]);
+                String resourceName = fields[count].getName();
+                locations[count] =  new Location(resourceID, resourceName);
+            } catch (IllegalAccessException e) {
+                Log.d("ERRRR", "error reading resource name");
+                e.printStackTrace();
+            }
+
+        }
+        return locations;
+    }
 
 
     @Override

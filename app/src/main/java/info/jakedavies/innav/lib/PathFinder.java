@@ -33,7 +33,7 @@ public class PathFinder {
         this.intersections = intersections;
         this.map = map;
     }
-    public ArrayList<Rect> reduce(){
+    public ArrayList<Rect> reduce(int goal_x, int goal_y){
         for(Intersection i : intersections) {
             if(!xPoints.contains(i.getX())){
                 xPoints.add(i.getX());
@@ -142,7 +142,7 @@ public class PathFinder {
         opt.allowDiagonal = false;
 
         AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
-        List<GridCell> pathToEnd = finder.findPath(0, 0, xPoints.size()-1, yPoints.size()-1, navGrid);
+        List<GridCell> pathToEnd = finder.findPath(0, 0, xPoints.indexOf(goal_x), yPoints.indexOf(goal_y), navGrid);
 
 
         ArrayList<Rect> output = new ArrayList<Rect>();

@@ -41,7 +41,7 @@ public class Map extends View{
     Camera c;
     long lastUpdate;
     private long updateFrequency = 100;
-    Paint[] paints = new Paint[5];
+    Paint[] paints = new Paint[6];
     public Map(Context context, info.jakedavies.innav.lib.map.Map map) {
         super(context);
 
@@ -99,6 +99,17 @@ public class Map extends View{
     }
 
     private void init(Context context){
+    }
+    public void setGoal(String goalName){
+        map.setGoal(goalName);
+        recalcPath();
+    }
+    public void setStart(int x, int y){
+        map.setStart(x,y);
+        recalcPath();
+    }
+    private void recalcPath(){
+        map.buildFloorPlan();
     }
 
 

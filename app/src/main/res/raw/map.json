@@ -31,7 +31,8 @@
   ],
   "intersections": [
     {
-      "canBeGoal": false,
+      "name": "Goal 1",
+      "canBeGoal": true,
       "x": 25,
       "y": 95
     },
@@ -56,7 +57,8 @@
       "y": 20
     },
     {
-      "canBeGoal": false,
+      "name": "Goal 2",
+      "canBeGoal": true,
       "x": 65,
       "y": 20
     }

@@ -30,8 +30,6 @@ public class Camera {
     private int phoneLeft;
     private int phoneRight;
     private int degrees;
-    private PathFinder pathFinder;
-
 
     public Camera(Map m){
         this.map = m;
