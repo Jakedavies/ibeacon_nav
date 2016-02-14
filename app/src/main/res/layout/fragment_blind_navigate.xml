@@ -26,7 +26,8 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:gravity="center"
-            android:text="Navigating to the Deli section"
+            android:text="Select a section"
+            android:id="@+id/section_name"
             android:textColor="@color/white"
             android:textSize="12sp"/>
     </LinearLayout>

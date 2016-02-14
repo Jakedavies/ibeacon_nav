@@ -21,6 +21,7 @@ import info.jakedavies.innav.lib.floorplan.Floorplan;
 public class Map {
     private int width;
     private int height;
+    private String name;
     private MapByte[][] floorplan;
     public Map(){
 
@@ -44,6 +45,9 @@ public class Map {
             sections.add(i);
         }
         return sections;
+    }
+    public String getName(){
+        return name;
     }
     public void addFeature(Feature f){
         features.add(f);

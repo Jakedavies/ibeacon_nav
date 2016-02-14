@@ -34,6 +34,8 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     private Heading  mSensor;
     private int mapID;
     private Button section_button;
+    TextView locationName;
+    TextView sectionName;
     private info.jakedavies.innav.lib.map.Map map;
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -54,6 +56,9 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         String json = getMapConfig(mapID);
         map  = g.fromJson(json, info.jakedavies.innav.lib.map.Map.class);
         mapView = new Map(getContext(), map);
+        locationName = (TextView)  v.findViewById(R.id.location_name);
+        sectionName  = (TextView) v.findViewById(R.id.section_name);
+        locationName.setText(map.getName());
         mapView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT));
@@ -106,9 +111,9 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                //TODO: do something here, like change navigation goal?
                 mapView.setGoal(item.getTitle().toString());
                 mapView.invalidate();
+                sectionName.setText("Navigating to" + item.getTitle().toString());
                 return false;
             }
         });
