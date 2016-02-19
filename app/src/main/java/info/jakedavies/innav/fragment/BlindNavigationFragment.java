@@ -1,5 +1,7 @@
 package info.jakedavies.innav.fragment;
 
+import android.graphics.Point;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,26 +14,22 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.Gson;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Random;
 
 import info.jakedavies.innav.R;
-import info.jakedavies.innav.feedback.AudioFeedback;
-import info.jakedavies.innav.lib.floorplan.Floorplan;
 import info.jakedavies.innav.lib.map.Intersection;
 import info.jakedavies.innav.sensor.Heading;
+import info.jakedavies.innav.sensor.Position;
 import info.jakedavies.innav.view.Map;
 
-public class BlindNavigationFragment extends Fragment implements Heading.HeadingChangedListener {
+public class BlindNavigationFragment extends Fragment implements Heading.HeadingChangedListener, Position.PositionChangedListener {
 
     private Map mapView;
-    private Heading  mSensor;
+    private Heading headingSensor;
+    private Position positionSensor;
     private int mapID;
     private Button section_button;
     TextView locationName;
@@ -40,7 +38,9 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mSensor = new Heading(getActivity().getApplication().getApplicationContext(), this);
+        super.onCreate(savedInstanceState);
+        headingSensor = new Heading(getActivity().getApplication().getApplicationContext(), this);
+        positionSensor = new Position(getActivity().getApplication().getApplicationContext(), this, mapView.getMap().getBeacons());
     }
 
     @Override
@@ -78,13 +78,15 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     @Override
     public void onStart(){
         super.onStart();
-        mSensor.registerListener();
+        headingSensor.registerListener();
+        positionSensor.registerListener();
     }
 
     @Override
     public void onStop(){
         super.onStop();
-        mSensor.unregisterListener();
+        headingSensor.unregisterListener();
+        positionSensor.unregisterListener();
     }
 
     @Override
@@ -133,6 +135,10 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
             e.printStackTrace();
         }
         return json;
+    }
+    @Override
+    public void positionChanged(Point p) {
+        Log.d("Position", "New Position: " + p.toString());
     }
     // heading sensor update event should push event to mapview to modify view
 

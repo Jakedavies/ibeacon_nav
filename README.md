@@ -50,10 +50,12 @@
 3. Heading and directional tracking (IE, N-S-E-W) in order to give turn based Navigation
 4. Navigational feedback for a user from the app (Haptic or voice)
 5. Basic location tracking using IBeacon (Simple proximity based tracking)
+6. Improve direction
 6. Location triangulation using IBeacon (More exact proximity based tracking)
 7. Pinpoint navigation of sections in a store (Lakeview market test)
 8. Server/client communication between mobile device and server for configuration data and additional tracking information
 9. Interpret location configuration files from server on device
+10. Scroll map with finger
 
 
 ## Timeline
@@ -95,8 +97,8 @@ Presentation | April 14th, 2016 | N/A
 ### Weeks from january 26th to March 1st
 
 * Week 1: Positioning with ibeacons
-* Week 2: Realistic map of real store
-* Week 3: routing to user selected area, show notifications near IBeacons, improving direction estimates using ibeacon with heading sensor
+* Week 2: Realistic map of real store, improving direction estimates using ibeacon with heading sensor
+* Week 3: routing to user selected area (with some search), show notifications near IBeacons
 * Week 4: Blind, ui improvements
 * Week 5: Sensor fusion
 
