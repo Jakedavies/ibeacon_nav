@@ -14,16 +14,23 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.estimote.sdk.Beacon;
+import com.estimote.sdk.BeaconManager;
+import com.estimote.sdk.Region;
 import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import info.jakedavies.innav.R;
 import info.jakedavies.innav.lib.map.Intersection;
 import info.jakedavies.innav.sensor.Heading;
 import info.jakedavies.innav.sensor.Position;
 import info.jakedavies.innav.view.Map;
+
 
 public class BlindNavigationFragment extends Fragment implements Heading.HeadingChangedListener, Position.PositionChangedListener {
 
@@ -32,8 +39,10 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     private Position positionSensor;
     private int mapID;
     private Button section_button;
+    private BeaconManager mBeaconManager;
     TextView locationName;
     TextView sectionName;
+    private static final Region ALL_ESTIMOTE_BEACONS = new Region("regionId", "B9407F30-F5F8-466E-AFF9-25556B57FE6D", null, null);
     private info.jakedavies.innav.lib.map.Map map;
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -58,6 +67,31 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         mapView = new Map(getContext(), map);
         locationName = (TextView)  v.findViewById(R.id.location_name);
         sectionName  = (TextView) v.findViewById(R.id.section_name);
+        mBeaconManager = new BeaconManager(getActivity().getApplication().getApplicationContext());
+
+        // Method called when a beacon gets...
+        mBeaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
+            @Override
+            public void onEnteredRegion(Region region, List<Beacon> list) {
+                Toast.makeText(getActivity().getApplicationContext(), "Entering Section", Toast.LENGTH_LONG);
+            }
+
+            @Override
+            public void onExitedRegion(Region region) {
+                Toast.makeText(getActivity().getApplicationContext(), "Exiting Section", Toast.LENGTH_LONG);
+            }
+        });
+        // Connect to the beacon manager...
+        mBeaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                try {
+                    // ... and start the monitoring
+                    mBeaconManager.startMonitoring(ALL_ESTIMOTE_BEACONS);
+                } catch (Exception e) {
+                }
+            }
+        });
         locationName.setText(map.getName());
         mapView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,
