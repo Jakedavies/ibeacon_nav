@@ -24,4 +24,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.estimote:sdk:0.8.8@aar'
     compile 'com.github.xaguzman:pathfinding:0.2.6'
+    compile 'org.apache.commons:commons-math3:3.4.1'
+    compile files('/Users/jakedavies/Dev/iBeacon_nav/Trilateration-1.0.0.jar')
 }

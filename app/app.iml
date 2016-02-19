@@ -88,6 +88,8 @@
     <orderEntry type="library" exported="" name="sdk-0.8.8" level="project" />
     <orderEntry type="library" exported="" name="pathfinding-0.2.6" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
+    <orderEntry type="library" exported="" name="commons-math3-3.4.1" level="project" />
+    <orderEntry type="library" exported="" name="Trilateration-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
   </component>

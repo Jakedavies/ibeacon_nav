@@ -10,6 +10,14 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.lemmingapex.*;
+import com.lemmingapex.trilateration.NonLinearLeastSquaresSolver;
+import com.lemmingapex.trilateration.TrilaterationFunction;
+
+import org.apache.commons.math3.fitting.leastsquares.LeastSquaresOptimizer;
+import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,8 +30,10 @@ public class Position {
     private PositionChangedListener mCallback;
     private SensorManager mSensorManager;
     private BeaconManager mBeaconManager;
+    long lastTimeUpdate = System.currentTimeMillis();
     private Region region = new Region("ranged region", "B9407F30-F5F8-466E-AFF9-25556B57FE6D", null, null);
     private List<info.jakedavies.innav.lib.map.Beacon> beacons;
+    private long updateInterval = 500;
 
     public interface PositionChangedListener {
         void positionChanged(Point p);
@@ -63,6 +73,7 @@ public class Position {
     }
 
     // returns the actual current location
+
     public Position(Context context, PositionChangedListener headingChangedListener, List<info.jakedavies.innav.lib.map.Beacon> beacons) {
         mCallback = headingChangedListener;
         mBeaconManager = new BeaconManager(context);
@@ -73,31 +84,51 @@ public class Position {
             @Override
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
                 if (list.size() >=  3) {
-                    trilateralCalc(list.get(0), list.get(1), list.get(2));
+                    if(System.currentTimeMillis() > lastTimeUpdate + updateInterval)
+                        trilateralCalc(list.get(0), list.get(1), list.get(2));
                 }
             }
 
         });
     }
 
-    private void trilateralCalc(Beacon a, Beacon b, Beacon c) {
+    private void updatePosition(Point newPosition){
+        lastTimeUpdate = System.currentTimeMillis();
+        mCallback.positionChanged(newPosition);
+    }
+
+    private Point trilateralCalc(Beacon a, Beacon b, Beacon c) {
         Point ab, bb, cb;
         ab = lookupBeacon(a.getMajor());
         bb = lookupBeacon(b.getMajor());
         cb = lookupBeacon(c.getMajor());
-        double[][] positions = new double[][] { { 5.0, -6.0 }, { 13.0, -15.0 }, { 21.0, -3.0 }, { 12.4, -21.2 } };
-        double[] distances = new double[] { 8.06, 13.97, 23.32, 15.31 };
+        double[][] positions = new double[][] { { ab.x, ab.y }, { bb.x, bb.y }, { cb.x, cb.y }};
+        double[] distances = new double[] {
+                calculateAccuracy(a.getMeasuredPower(), a.getRssi()),
+                calculateAccuracy(b.getMeasuredPower(), b.getRssi()),
+                calculateAccuracy(c.getMeasuredPower(), c.getRssi())
+        };
 
         NonLinearLeastSquaresSolver solver = new NonLinearLeastSquaresSolver(new TrilaterationFunction(positions, distances), new LevenbergMarquardtOptimizer());
-        Optimum optimum = solver.solve();
+        LeastSquaresOptimizer.Optimum optimum = solver.solve();
 
-// the answer
+        // the answer
         double[] centroid = optimum.getPoint().toArray();
 
-// error and geometry information; may throw SingularMatrixException depending the threshold argument provided
-        RealVector standardDeviation = optimum.getSigma(0);
-        RealMatrix covarianceMatrix = optimum.getCovariances(0);
-        // perform 3 quadratics and then we solve for x...
+        return new Point((int) centroid[0], (int) centroid[1]);
+    }
 
+    // http://stackoverflow.com/questions/20416218/understanding-ibeacon-distancing/20434019#20434019
+    private double calculateAccuracy(int txPower, double rssi) {
+        if (rssi == 0) {
+            return -1.0; // if we cannot determine accuracy, return -1.
+        }
+        double ratio = rssi*1.0/txPower;
+        if (ratio < 1.0) {
+            return Math.pow(ratio,10);
+        }
+        else {
+            return (0.89976)*Math.pow(ratio,7.7095) + 0.111;
+        }
     }
 }
