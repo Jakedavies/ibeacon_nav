@@ -139,6 +139,7 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     @Override
     public void positionChanged(Point p) {
         Log.d("Position", "New Position: " + p.toString());
+        map.setStart(p.x, p.y);
     }
     // heading sensor update event should push event to mapview to modify view
 

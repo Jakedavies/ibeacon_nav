@@ -29,11 +29,14 @@ public class PathFinder {
     private ArrayList<Integer> xPoints = new ArrayList<Integer>();
     private ArrayList<Integer> yPoints  = new ArrayList<Integer>();;
     private int halfPathWidth =1;
+    private Intersection start;
     public PathFinder(ArrayList<Intersection> intersections, MapByte[][] map){
         this.intersections = intersections;
         this.map = map;
     }
-    public ArrayList<Rect> reduce(int goal_x, int goal_y){
+    public ArrayList<Rect> reduce(int start_x, int start_y, int goal_x, int goal_y){
+        start = new Intersection(start_x, start_y,false);
+        intersections.add(start);
         for(Intersection i : intersections) {
             if(!xPoints.contains(i.getX())){
                 xPoints.add(i.getX());
@@ -142,13 +145,13 @@ public class PathFinder {
         opt.allowDiagonal = false;
 
         AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
-        List<GridCell> pathToEnd = finder.findPath(0, 0, xPoints.indexOf(goal_x), yPoints.indexOf(goal_y), navGrid);
+        List<GridCell> pathToEnd = finder.findPath(xPoints.indexOf(start.getX()), yPoints.indexOf(start.getY()), xPoints.indexOf(goal_x), yPoints.indexOf(goal_y), navGrid);
 
 
         ArrayList<Rect> output = new ArrayList<Rect>();
         GridCell start = new GridCell();
-        start.setX(0);
-        start.setY(0);
+        start.setX(xPoints.indexOf(start.getX()));
+        start.setY(yPoints.indexOf(start.getY()));
         start.setWalkable(true);
         pathToEnd.add(0, start);
         for (GridCell gc: pathToEnd) {
