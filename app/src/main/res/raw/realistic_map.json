@@ -1,0 +1,163 @@
+{
+  "features": [
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 14,
+      "y": 10
+    },
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 30,
+      "y": 10
+    },
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 46,
+      "y": 10
+    },
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 62,
+      "y": 10
+    },
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 78,
+      "y": 10
+    },
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 14,
+      "y": 50
+    },
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 30,
+      "y": 50
+    },
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 46,
+      "y": 50
+    },
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 62,
+      "y": 50
+    },
+    {
+      "height": 30,
+      "type": "isle",
+      "width": 8,
+      "x": 78,
+      "y": 50
+    }
+  ],
+  "intersections": [
+    {
+      "canBeGoal": false,
+      "x": 27,
+      "y": 5
+    },
+    {
+      "canBeGoal": false,
+      "x": 45,
+      "y": 5
+    },
+    {
+      "canBeGoal": false,
+      "x": 63,
+      "y": 5
+    },
+    {
+      "canBeGoal": false,
+      "x": 81,
+      "y": 45
+    },
+    {
+      "canBeGoal": false,
+      "x": 27,
+      "y": 45
+    },
+    {
+      "canBeGoal": false,
+      "x": 45,
+      "y": 45
+    },
+    {
+      "canBeGoal": false,
+      "x": 63,
+      "y": 45
+    },
+    {
+      "canBeGoal": false,
+      "x": 81,
+      "y": 45
+    },
+    {
+      "canBeGoal": false,
+      "x": 27,
+      "y": 90
+    },
+    {
+      "canBeGoal": false,
+      "x": 45,
+      "y": 90
+    },
+    {
+      "canBeGoal": false,
+      "x": 63,
+      "y": 90
+    },
+    {
+      "canBeGoal": false,
+      "x": 81,
+      "y": 95
+    },
+    {
+      "canBeGoal": true,
+      "name": "Produce",
+      "x": 27,
+      "y": 65
+    },
+    {
+      "canBeGoal": true,
+      "name": "Drinks",
+      "x": 27,
+      "y": 25
+    },
+    {
+      "canBeGoal": true,
+      "name": "Deli",
+      "x": 63,
+      "y": 65
+    },
+    {
+      "canBeGoal": true,
+      "name": "Bakery",
+      "x": 63,
+      "y": 25
+    }
+  ],
+  "name": "Realistic Map",
+  "height": 100,
+  "width": 100
+}

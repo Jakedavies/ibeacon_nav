@@ -43,11 +43,7 @@ public class Map extends View{
     long lastUpdate;
     private long updateFrequency = 100;
     Paint[] paints = new Paint[6];
-<<<<<<< HEAD
     public Map(Context context, info.jakedavies.innav.lib.map.Map map) {
-=======
-    public Map(Context context) {
->>>>>>> 1a309b8cc9006331f919964828a49bd1440fcfc9
         super(context);
 
         this.map = map;

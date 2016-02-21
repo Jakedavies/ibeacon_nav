@@ -5,6 +5,9 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,6 +26,7 @@ import com.estimote.sdk.repackaged.gson_v2_3_1.com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import info.jakedavies.innav.R;
@@ -38,10 +42,10 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     private Heading headingSensor;
     private Position positionSensor;
     private int mapID;
-    private Button section_button;
     private BeaconManager mBeaconManager;
+    private AutoCompleteTextView section;
+    private ArrayList<Intersection> goals;
     TextView locationName;
-    TextView sectionName;
     private static final Region ALL_ESTIMOTE_BEACONS = new Region("regionId", "B9407F30-F5F8-466E-AFF9-25556B57FE6D", null, null);
     private info.jakedavies.innav.lib.map.Map map;
     @Override
@@ -66,9 +70,13 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         map  = g.fromJson(json, info.jakedavies.innav.lib.map.Map.class);
         mapView = new Map(getContext(), map);
         locationName = (TextView)  v.findViewById(R.id.location_name);
-        sectionName  = (TextView) v.findViewById(R.id.section_name);
+        section = (AutoCompleteTextView) v.findViewById(R.id.section);
         mBeaconManager = new BeaconManager(getActivity().getApplication().getApplicationContext());
-
+        for(Intersection s : map.getSections()){
+            if(s.canBeGoal()){
+                goals.add(s);
+            }
+        }
         // Method called when a beacon gets...
         mBeaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
             @Override
@@ -96,14 +104,16 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         mapView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT));
-
-        section_button = (Button) v.findViewById(R.id.section_button);
-        section_button.setOnClickListener(new View.OnClickListener() {
+        ArrayAdapter<Intersection> adapter = new ArrayAdapter<Intersection>(getActivity().getApplication().getApplicationContext(), R.layout.section_item, goals);
+        section.setAdapter(adapter);
+        section.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v){
-                onSectionClick();
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
+                mapView.setGoal(goals.get(pos).getName());
+                mapView.invalidate();
             }
         });
+
 
         // by programmatically adding the view we can maintain a pointer to the view and modify data
         mapLayout.addView(mapView);
@@ -126,35 +136,6 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     @Override
     public void headingChanged(int heading) {
         //mapView.translateToPosition(heading);
-    }
-    private void onSpeakerClick(View v) {
-        mapView.setZoom();
-    }
-    private void onVibrateClick(View v) {
-        mapView.toggleNorthLock();
-    }
-    private void onSectionClick(){
-        //Creating the instance of PopupMenu
-        PopupMenu popup = new PopupMenu(getActivity().getApplication().getApplicationContext(), section_button);
-        //Inflating the Popup using xml file
-        popup.getMenuInflater().inflate(R.menu.section_menu, popup.getMenu());
-        for(Intersection s : map.getSections()){
-            if(s.canBeGoal()){
-                popup.getMenu().add(s.getName());
-            }
-        }
-        //registering popup with OnMenuItemClickListener
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                mapView.setGoal(item.getTitle().toString());
-                mapView.invalidate();
-                sectionName.setText("Navigating to" + item.getTitle().toString());
-                return false;
-            }
-        });
-
-        popup.show();//showing popup menu
     }
     private String getMapConfig(int id) {
         String json = null;

@@ -23,4 +23,7 @@ public class Intersection {
     public int getY(){
         return y;
     }
+    public String toString(){
+        return name;
+    }
 }
