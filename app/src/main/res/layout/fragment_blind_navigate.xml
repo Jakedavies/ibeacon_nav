@@ -27,7 +27,9 @@
             android:text="Select a section"
             android:id="@+id/section"
             android:layout_gravity="center_horizontal"
-            android:minWidth="200dp" />
+            android:minWidth="200dp"
+            android:textCursorDrawable="@null"
+            android:textColor="#ffffff" />
 
     </LinearLayout>
     <LinearLayout

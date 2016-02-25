@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
-import com.lemmingapex.*;
 import com.lemmingapex.trilateration.NonLinearLeastSquaresSolver;
 import com.lemmingapex.trilateration.TrilaterationFunction;
 
@@ -31,7 +30,7 @@ public class Position {
     private SensorManager mSensorManager;
     private BeaconManager mBeaconManager;
     long lastTimeUpdate = System.currentTimeMillis();
-    private Region region = new Region("ranged region", "B9407F30-F5F8-466E-AFF9-25556B57FE6D", null, null);
+    private Region region = new Region("ranged region", "B9407F30-F5F8-466E-AFF9-012345678910", null, null);
     private List<info.jakedavies.innav.lib.map.Beacon> beacons;
     private long updateInterval = 500;
 
@@ -84,8 +83,12 @@ public class Position {
             @Override
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
                 if (list.size() >=  3) {
-                    if(System.currentTimeMillis() > lastTimeUpdate + updateInterval)
-                        trilateralCalc(list.get(0), list.get(1), list.get(2));
+                    if(System.currentTimeMillis() > lastTimeUpdate + updateInterval){
+                        Point newPosition = trilateralCalc(list.get(0), list.get(1), list.get(2));
+                        if(newPosition != null){
+                            updatePosition(newPosition);
+                        }
+                    }
                 }
             }
 
@@ -102,11 +105,15 @@ public class Position {
         ab = lookupBeacon(a.getMajor());
         bb = lookupBeacon(b.getMajor());
         cb = lookupBeacon(c.getMajor());
+        if (ab == null || bb == null || cb == null){
+            return null;
+        }
         double[][] positions = new double[][] { { ab.x, ab.y }, { bb.x, bb.y }, { cb.x, cb.y }};
         double[] distances = new double[] {
-                calculateAccuracy(a.getMeasuredPower(), a.getRssi()),
-                calculateAccuracy(b.getMeasuredPower(), b.getRssi()),
-                calculateAccuracy(c.getMeasuredPower(), c.getRssi())
+                // scale measurments to a tenth of a meter
+                calculateAccuracy(a.getMeasuredPower(), a.getRssi()) * 10,
+                calculateAccuracy(b.getMeasuredPower(), b.getRssi()) * 10,
+                calculateAccuracy(c.getMeasuredPower(), c.getRssi()) * 10,
         };
 
         NonLinearLeastSquaresSolver solver = new NonLinearLeastSquaresSolver(new TrilaterationFunction(positions, distances), new LevenbergMarquardtOptimizer());

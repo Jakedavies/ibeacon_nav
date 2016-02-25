@@ -1,48 +1,30 @@
 {
   "beacons": [
     {
-      "x": 0,
-      "y": 0,
-      "uuid": "1"
+      "x": 1,
+      "y": 1,
+      "id": "1"
     },
     {
-      "x": 4,
-      "y": 9,
-      "uuid": "2"
+      "x": 19,
+      "y": 38,
+      "id": "2"
     },
     {
-      "x": 9,
-      "y": 0,
-      "uuid": "3"
+      "x": 38,
+      "y": 1,
+      "id": "3"
     }
   ],
   "intersections": [
     {
       "canBeGoal": true,
-      "x": 1,
-      "y": 1,
-      "name": "section 1"
-    },
-    {
-      "canBeGoal": true,
-      "x": 1,
-      "y": 8,
-      "name": "section 2"
-    },
-    {
-      "canBeGoal": true,
-      "x": 8,
-      "y": 1,
-      "name": "section 3"
-    },
-    {
-      "canBeGoal": true,
-      "x": 8,
-      "y": 8,
-      "name": "section 4"
+      "x": 19,
+      "y": 19,
+      "name": "Middle"
     }
   ],
   "name": "Box with beacons and sections",
-  "height": 10,
-  "width": 10
+  "height": 40,
+  "width": 40
 }

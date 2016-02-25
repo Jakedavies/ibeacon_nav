@@ -1,10 +1,12 @@
 package info.jakedavies.innav.fragment;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -45,6 +47,7 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     private BeaconManager mBeaconManager;
     private AutoCompleteTextView section;
     private ArrayList<Intersection> goals;
+    private View v;
     TextView locationName;
     private static final Region ALL_ESTIMOTE_BEACONS = new Region("regionId", "B9407F30-F5F8-466E-AFF9-25556B57FE6D", null, null);
     private info.jakedavies.innav.lib.map.Map map;
@@ -52,15 +55,16 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
+        goals = new ArrayList<Intersection>();
         headingSensor = new Heading(getActivity().getApplication().getApplicationContext(), this);
-        positionSensor = new Position(getActivity().getApplication().getApplicationContext(), this, mapView.getMap().getBeacons());
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.fragment_blind_navigate, container, false);
+        v = inflater.inflate(R.layout.fragment_blind_navigate, container, false);
         LinearLayout mapLayout = (LinearLayout) v.findViewById(R.id.map);
 
         mapID = getArguments().getInt("location");
@@ -104,11 +108,15 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         mapView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT));
-        ArrayAdapter<Intersection> adapter = new ArrayAdapter<Intersection>(getActivity().getApplication().getApplicationContext(), R.layout.section_item, goals);
+        ArrayAdapter<Intersection> adapter = new ArrayAdapter<Intersection>(getActivity().getApplication().getApplicationContext(), R.layout.section_item,R.id.section_item_section_name, goals);
         section.setAdapter(adapter);
         section.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
+                hideKeyboard();
+                section.dismissDropDown();
+                section.clearFocus();
+                mapView.requestFocus();
                 mapView.setGoal(goals.get(pos).getName());
                 mapView.invalidate();
             }
@@ -117,6 +125,7 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
 
         // by programmatically adding the view we can maintain a pointer to the view and modify data
         mapLayout.addView(mapView);
+        positionSensor = new Position(getActivity().getApplication().getApplicationContext(), this, mapView.getMap().getBeacons());
         return v;
     }
     @Override
@@ -157,5 +166,8 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         map.setStart(p.x, p.y);
     }
     // heading sensor update event should push event to mapview to modify view
-
+    private void hideKeyboard() {
+        InputMethodManager inputManager = (InputMethodManager) this.getActivity().getApplication().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 }

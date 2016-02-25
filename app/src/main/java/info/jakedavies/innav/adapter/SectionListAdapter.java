@@ -29,7 +29,7 @@ public class SectionListAdapter extends ArrayAdapter<String> {
         }
 
         String name = objects[position];
-        TextView lname = (TextView) v.findViewById(R.id.section_name);
+        TextView lname = (TextView) v.findViewById(R.id.section_item_section_name);
         lname.setText(name);
 
         return v;
