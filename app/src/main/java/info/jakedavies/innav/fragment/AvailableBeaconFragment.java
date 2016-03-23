@@ -27,7 +27,7 @@ public class AvailableBeaconFragment extends Fragment {
     private String scanId;
     private static final String TAG = "MainActivity";
     private BeaconListAdapter adapter;
-    private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
+    private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", "B9407F30-F5F8-466E-AFF9-012345678910", null, null);
 
     public AvailableBeaconFragment() {
     }

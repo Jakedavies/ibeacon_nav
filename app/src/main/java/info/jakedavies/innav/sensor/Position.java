@@ -94,12 +94,19 @@ public class Position {
 
         });
     }
+    public Position(){
+
+    }
 
     private void updatePosition(Point newPosition){
         lastTimeUpdate = System.currentTimeMillis();
         mCallback.positionChanged(newPosition);
     }
-
+    public double[] getCentroid(double[][] positions, double distances[]){
+        NonLinearLeastSquaresSolver solver = new NonLinearLeastSquaresSolver(new TrilaterationFunction(positions, distances), new LevenbergMarquardtOptimizer());
+        LeastSquaresOptimizer.Optimum optimum = solver.solve();
+        return optimum.getPoint().toArray();
+    };
     private Point trilateralCalc(Beacon a, Beacon b, Beacon c) {
         Point ab, bb, cb;
         ab = lookupBeacon(a.getMajor());
@@ -116,11 +123,10 @@ public class Position {
                 calculateAccuracy(c.getMeasuredPower(), c.getRssi()) * 10,
         };
 
-        NonLinearLeastSquaresSolver solver = new NonLinearLeastSquaresSolver(new TrilaterationFunction(positions, distances), new LevenbergMarquardtOptimizer());
-        LeastSquaresOptimizer.Optimum optimum = solver.solve();
+
 
         // the answer
-        double[] centroid = optimum.getPoint().toArray();
+        double[] centroid = getCentroid(positions, distances);
 
         return new Point((int) centroid[0], (int) centroid[1]);
     }
