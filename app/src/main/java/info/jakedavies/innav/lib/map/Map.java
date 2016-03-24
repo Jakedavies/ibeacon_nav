@@ -66,7 +66,7 @@ public class Map {
         return 50;
     }
 
-    public int start_x, start_y, goal_x = -1, goal_y = -1;
+    public int start_x = -1, start_y = -1, goal_x = -1, goal_y = -1;
 
     public void setGoal(String goalName){
         for (Intersection i:
@@ -85,10 +85,14 @@ public class Map {
 
     public void buildFloorPlan(){
         floorplan = new MapByte[width][height];
+
         for(int i = 0; i< floorplan.length; i++){
             for(int j = 0; j < floorplan.length; j++){
                 floorplan[i][j] = new MapByte();
             }
+        }
+        if(start_x != -1 && start_y != -1) {
+            floorplan[start_x][start_y].setUser(true);
         }
         for(Feature f : features){
             String type = f.getType();

@@ -47,24 +47,24 @@ public class LocationSelectFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                // set Fragmentclass Arguments
-                Location location = (Location) locationListView.getItemAtPosition(position);
+            // set Fragmentclass Arguments
+            Location location = (Location) locationListView.getItemAtPosition(position);
 
 
-                Bundle bundle = new Bundle();
-                bundle.putInt("location",location.getId());
-                // Create fragment and give it an argument specifying the article it should show
-                BlindNavigationFragment newFragment = new BlindNavigationFragment();
-                newFragment.setArguments(bundle);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            Bundle bundle = new Bundle();
+            bundle.putInt("location",location.getId());
+            // Create fragment and give it an argument specifying the article it should show
+            BlindNavigationFragment newFragment = new BlindNavigationFragment();
+            newFragment.setArguments(bundle);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                // Replace whatever is in the fragment_container view with this fragment,
-                // and add the transaction to the back stack so the user can navigate back
-                transaction.replace(R.id.fragment_container, newFragment);
-                transaction.addToBackStack(null);
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack so the user can navigate back
+            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.addToBackStack(null);
 
-                // Commit the transaction
-                transaction.commit();
+            // Commit the transaction
+            transaction.commit();
             }
         });
         return v;

@@ -12,6 +12,9 @@ public class MapByte {
     public void setWall(boolean value){
         setBit(0, value);
     }
+    public void setUser(boolean value) {
+        setBit(6, value);
+    }
     //bit 1
     public void setObstacle(boolean value){
         setBit(1, value);
@@ -54,6 +57,9 @@ public class MapByte {
     }
     public boolean isWalkable(){
         return !isIsle() && !isObstacle();
+    }
+    public boolean isUser() {
+        return bitVal(6);
     }
     public boolean setType(String type){
         if(type.equals("obstacle")){

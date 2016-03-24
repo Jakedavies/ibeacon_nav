@@ -42,7 +42,7 @@ public class Map extends View{
     Camera c;
     long lastUpdate;
     private long updateFrequency = 100;
-    Paint[] paints = new Paint[6];
+    Paint[] paints = new Paint[7];
     public Map(Context context, info.jakedavies.innav.lib.map.Map map) {
         super(context);
 
@@ -93,6 +93,13 @@ public class Map extends View{
         paints[5].setColor(Color.RED);
         paints[5].setStyle(Paint.Style.FILL);
         paints[5].setStrokeWidth(5);
+
+
+        paints[6] = new Paint();
+        paints[6].setColor(Color.GREEN);
+        paints[6].setStyle(Paint.Style.FILL);
+        paints[6].setStrokeWidth(5);
+
 
         lastUpdate = System.currentTimeMillis();
         vibrator = (Vibrator) context.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);

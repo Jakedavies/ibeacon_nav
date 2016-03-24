@@ -1,0 +1,31 @@
+{
+  "features": [
+    {
+      "height": 66,
+      "type": "isle",
+      "width": 20,
+      "x": 0,
+      "y": 0
+    }
+  ],
+  "beacons": [
+    {
+      "x": 10,
+      "y": 70,
+      "id": "1"
+    },
+    {
+      "x": 70,
+      "y": 70,
+      "id": "2"
+    },
+    {
+      "x": 70,
+      "y": 20,
+      "id": "3"
+    }
+  ],
+  "name": "My Basement",
+  "height": 90,
+  "width": 90
+}
