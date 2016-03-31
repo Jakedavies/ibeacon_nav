@@ -75,7 +75,7 @@ public class Heading implements SensorEventListener {
                     int segmentSizeInDegress = 360 / 8;
                     int segmentNumber = inDegs / segmentSizeInDegress;
                     int outDegs = (segmentNumber * segmentSizeInDegress);
-                    mCallback.headingChanged(outDegs);
+                    mCallback.headingChanged((int) Math.toDegrees(inRads));
                 }
             }
         }

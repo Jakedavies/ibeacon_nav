@@ -65,10 +65,11 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
     TextView locationResponse;
     TextView headingView;
     private static final Region ALL_ESTIMOTE_BEACONS = new Region("regionId", "B9407F30-F5F8-466E-AFF9-012345678910", null, null);
-    private static final String TRACKING_SERVER = "http://honors-beacon-server.herokuapp.com";
+    private static final String TRACKING_SERVER = "http://192.168.0.136:3000";
     private info.jakedavies.innav.lib.map.Map map;
     Handler h = new Handler();
-    int delay = 1000; //milliseconds
+    int delay = 1500; //milliseconds
+    private String uuid;
 
 
     @Override
@@ -97,6 +98,7 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
         locationResponse = (TextView) v.findViewById(R.id.location_response);
         headingView = (TextView) v.findViewById(R.id.heading);
         section = (AutoCompleteTextView) v.findViewById(R.id.section);
+        uuid = UUID.randomUUID().toString();
 
         for(Intersection s : map.getSections()){
             if(s.canBeGoal()){
@@ -209,7 +211,7 @@ public class BlindNavigationFragment extends Fragment implements Heading.Heading
             }
             obj.put("beacons", beaconObjects);
             obj.put("heading", heading);
-            obj.put("uuid", UUID.randomUUID().toString());
+            obj.put("uuid", uuid);
         } catch (Exception e) {
             Log.e("API", e.toString());
         }

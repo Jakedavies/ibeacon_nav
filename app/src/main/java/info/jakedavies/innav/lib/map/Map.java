@@ -92,6 +92,20 @@ public class Map {
             }
         }
         if(start_x != -1 && start_y != -1) {
+            if(start_x < 0 ){
+                start_x = 0;
+            }
+            if(start_x > floorplan.length-1) {
+                start_x = floorplan.length-1;
+            }
+
+            if(start_y < 0 ){
+                start_y = 0;
+            }
+            if(start_y > floorplan[0].length-1) {
+                start_y = floorplan[0].length-1;
+            }
+
             floorplan[start_x][start_y].setUser(true);
         }
         for(Feature f : features){
